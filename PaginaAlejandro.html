@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <link rel="icon" type="image/png" href="imagenes/logo_multiIcono.png">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiimagen - Rótulos</title>
+
+    <!-- Fuente moderna -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"/>
+
+    <!-- Tu CSS principal -->
+    <link rel="stylesheet" href="PaginaAle.css" /> <!-- Esto es para conectar el CSS con el html-->
+  </head>
+  
+  <body>
+    <!-- Decoraciones de fondo que se mueven -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+
+    <header class="header">
+      <div class="container header-content">
+        <div class="logo">
+          <img src="imagenes/logo_multi.png" alt="Logo Multiimagen">
+        </div>
+
+        <nav class="nav">
+          <a href="#inicio">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <button class="btn btn-outline">Hablemos</button>
+      </div>
+    </header>
+
+    <div class ="joinchat_button">
+      <div class = "joinchat_button_open"></div>
+    </div>
+
+<!--CAMBIAR ESTO-->
+
+        <!-- HERO NUEVO CON VIDEO DE FONDO -->
+<section id="inicio" class="hero hero-multimagen">
+  <!-- Video de fondo -->
+  <video class="hero-video" autoplay muted loop playsinline>
+  <source src="videos/testeo.mp4" type="video/mp4" />
+</video>
+
+  <!-- Capa roja encima del video (cortina tipo sitio original) -->
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-multimagen-content reveal">
+    <p class="hero-overline">IMPRESIONES Y ROTULACIONES</p>
+
+    <h1 class="hero-title">
+      QUE HABLAN
+      <span class="hero-animated-words">
+        <span class="word">POR TU MARCA.</span>
+        <span class="word">EN GRANDE.</span>
+        <span class="word">CON IMPACTO.</span>
+      </span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Somos una de las compañías costarricenses de mayor prestigio en el sector
+      de la imagen y la publicidad exterior, transformando cada espacio en una
+      experiencia visual inolvidable.
+    </p>
+
+    <div class="hero-actions hero-actions-center">
+      <button class="btn btn-primary">Contáctenos</button>
+    </div>
+  </div>
+</section>
+<!--hasta aquí-->
+
+    <!-- SERVICIOS / PANELES -->
+    <section id="servicios" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <h1>Servicios que ofrecemos</h1>
+          <p>
+            Paneles claros, tipografía limpia y detalles interactivos pensados
+            para usted.
+          </p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card reveal"> <!--El "article" agrupa contenido independiente, o sea, bloques que tienen sentido por sí solos-->
+            <h2>Rótulos Luminosos<h2>
+            <p>
+              Ofrecemos productos de gran calidad y excelente exposición, construidos en una amplia gama 
+              de materiales como aluminio, acero e hierro. También ofrecemos diversos sustratos a elegir, 
+              como lona, acrílico y policarbonato, con rotulaciones digitales de alta calidad o vinilo de 
+              corte. Además, los productos pueden ser iluminados con fluorescentes, LEDs o neón.
+            </p>
+            <button class="card-btn">Más detalles</button>
+          </article>
+
+          <article class="card reveal">
+            <h2>Vallas</h2>
+            <p>
+              La exposición en carretera es una de las maneras más efectivas de llegar a sus consumidores. 
+              Ya sea en venta directa o en alquiler, las vallas publicitarias pueden ser su aliado más fiel en el 
+              camino hacia la proyección exitosa de su negocio.
+            </p>
+              <button class="card-btn">Ver ejemplos</button>
+          </article>
+
+          <article class="card reveal">
+            <h2>Rotulación interna</h2>
+            <p>
+              Nuestra División Industrial ejecuta proyectos integrales de imagen corporativa, cumpliendo con los 
+              más estrictos criterios de servicio y calidad. Contamos con la estructura necesaria para garantizar el 
+              seguimiento perfecto de cada fase del proyecto, desde el inicio de la relación con el cliente hasta la 
+              instalación y puesta en marcha del último elemento.
+            </p>
+            <button class="card-btn">Cómo funciona</button>
+          </article>
+
+          <article class = "card reveal">
+            <h2>Impresión Digital</h2>
+            <p>Nuestro departamento especializado ofrece servicios de impresión de gran formato 
+              con tecnología digital avanzada. Aplicamos técnicas versátiles y creativas en materiales 
+              duraderos, garantizando imágenes a todo color para diversas aplicaciones, desde carteles 
+              promocionales hasta proyectos de gran formato.</p>
+              <button class = "card-btn">Ver ejemplos</button>
+          </article>
+
+          <article class = "card reveal">
+            <h2>Letras de Relieve</h2>
+            <p>Ofrecemos servicios de Ruteo Electrónico para cortar y dar forma a materiales como 
+              madera, hierro, acero, aluminio, PVC, acrílico y policarbonato. Estos materiales se 
+              utilizan para fabricar letras corpóreas, señalética interna y productos P.O.P. </p>
+              <button class = "card-btn">Ver ejemplos</button>
+            </article>
+
+            <article class = "card reveal">
+              <h2> Sistemas de Exhibición Modulares</h2>
+              <p>En Multimagen le diseñamos, construimos o le traemos mediante catalogo una gran 
+                cantidad de modelos de sistemas de exhibicion modulares tales como stands para ferias, 
+                bases para banners, porta carteles, fondos para presentacion etc.</p>
+                <button class = "card-btn">Ver ejemoplos</button>
+            </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYECTOS con slider simple -->
+    <section id="proyectos" class="section section-alt">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Algunos proyectos</h2>
+          <p>Deslice para ver ejemplos de estilos limpios y modernos.</p>
+        </div>
+
+        <div class="slider">
+          <button class="slider-btn prev">&#10094;</button>
+          <div class="slider-track">
+            <div class="slide">
+              <img
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=80"
+                alt="Proyecto web 1"
+              />
+              <h4>Plataforma SaaS minimalista</h4>
+            </div>
+            <div class="slide">
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80"
+                alt="Proyecto web 2"
+              />
+              <h4>Sitio de agencia creativa</h4>
+            </div>
+            <div class="slide">
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80"
+                alt="Proyecto web 3"
+              />
+              <h4>Landing page para startup</h4>
+            </div>
+          </div>
+          <button class="slider-btn next">&#10095;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta">
+      <div class="container cta-content reveal">
+        <h2>¿Listo para darle una estética profesional a su sitio?</h2>
+        <p>
+          Trabajamos con código ordenado, animaciones suaves y un enfoque
+          centrado en la experiencia de sus usuarios.
+        </p>
+        <button class="btn btn-primary">Agendar una reunión</button>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="section">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <h2>Contacto</h2>
+          <p>
+            Cuéntenos sobre su proyecto y le ayudamos a crear una página
+            moderna, rápida y atractiva.
+          </p>
+          <ul class="contact-list">
+            <li><strong>Email:</strong> ventas@multimagencr.com</li>
+            <li><strong>Teléfono:</strong> +506 2494-6967</li>
+            <li><strong>Ubicación:</strong> 3MPM+QC4, Bajo Los Golondrinas, Provincia de Alajuela, Grecia, Latino</li>
+          </ul>
+        </div>
+
+        <form class="contact-form reveal">
+          <input type="text" placeholder="Nombre" required />
+          <input type="email" placeholder="Correo electrónico" required />
+          <textarea
+            rows="4"
+            placeholder="Cuéntanos sobre tu proyecto"
+          ></textarea>
+          <button type="submit" class="btn btn-primary">
+            Enviar mensaje
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <p>© 2025 Multiimagen. Todos los derechos reservados.</p>
+        <p class="small">Desarrollado por Jose Gabriel Chacón</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

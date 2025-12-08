@@ -1,0 +1,767 @@
+:root {
+  --bg: #061605;
+  --bg-alt: #0b1020;
+  --card-bg: #0f172a;
+  --accent: rgb(255, 0, 0);
+  --accent-soft: rgba(79, 70, 229, 0.15);
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --border-soft: rgba(112, 6, 107, 0.3);
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --shadow-soft: 0 18px 40px rgba(255, 255, 255, 0.75);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  background: radial-gradient(circle at top left, #ffffff, #c20505 80%, #f5f4f3);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Contenedores generales */
+.container {
+  width: min(1120px, 100% - 2.5rem);
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(1323px);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.95),
+    rgb(184, 178, 178),
+    transparent
+  );
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+}
+
+.logo {
+  /* Ajusta estos valores según qué tan pequeño lo quieres. */
+  /* Por ejemplo, 180px de ancho y altura automática: */
+  width: 180px; 
+  height: auto;
+  /* La imagen del logo en el header no debe tener border-radius */
+  border-radius: 0;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.nav {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.9rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text-muted);
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+
+.nav a:hover {
+  color: var(--text-main);
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* Botones */
+.btn {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+/* Botón de iniciar proyecto / principal */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #22c55e);
+  color: white;
+  box-shadow: 0 12px 30px rgba(235, 3, 3, 0.5);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 16px 40px rgba(255, 255, 255, 0.6);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--border-soft);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover {
+  color: var(--text-main);
+  background: rgba(148, 163, 184, 0.08);
+}
+
+/* HERO base (por si usa otros heroes) */
+.hero {
+  padding: 4.5rem 0 3.5rem;
+}
+
+/* ================= HERO ESTILO MULTIIMAGEN ================= */
+
+.hero.hero-multimagen {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 0 5rem;
+  color: #ffffff;
+  overflow: hidden;
+  background: #000; /* color de respaldo si falla el video */
+}
+
+/* Video de fondo del hero */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;        /* ahora está dentro del hero, no detrás del body */
+}
+
+
+/* Capa roja encima del video (cortina) */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(120, 0, 0, 0.75),   /* rojo oscuro semi-transparente arriba */
+    rgba(80, 0, 0, 0.85),    /* más opaco a la mitad */
+    rgba(60, 0, 0, 0.92)     /* casi negro rojizo abajo */
+  );
+  z-index: 1;
+}
+
+
+
+.hero-multimagen-content {
+  position: relative;
+  z-index: 32;
+  text-align: center;
+  max-width: 840px;
+}
+
+.hero-overline {
+  font-size: 0.95rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin: 0 0 0.9rem;
+  opacity: 0.9;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  font-weight: 700;
+
+  
+}
+
+.hero-title span {
+  display: inline-block;
+}
+
+/* Texto que cambia tipo "QUE HABLAN POR TU MARCA / EN GRANDE / CON IMPACTO" */
+.hero-animated-words {
+  position: relative;
+  display: inline-block;
+  min-width: 12ch; /* para que no brinque el ancho */
+  top: -0.89em; /* 🔹 sube un poquito el texto animado */  
+}
+
+.hero-animated-words .word {
+  position: absolute;
+  inset: 0 auto auto 0;
+  white-space: nowrap;
+  opacity: 0;
+  animation: rotateWord 9s infinite;
+}
+
+.hero-animated-words .word:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.hero-animated-words .word:nth-child(2) {
+  animation-delay: 3s;
+}
+
+.hero-animated-words .word:nth-child(3) {
+  animation-delay: 6s;
+}
+
+@keyframes rotateWord {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  5%,
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  35%,
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Subtítulo estilo sitio oficial */
+.hero-subtitle {
+  max-width: 46rem;
+  margin: 0 auto 1.8rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Centrar botón principal en el hero */
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.hero-actions-center {
+  justify-content: center;
+}
+
+/* Marca de agua gigante detrás del texto */
+.hero-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ======= (Antiguos estilos del hero-grid por si los usa en otro lado) ======= */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: clamp(2.3rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero-text h1 span {
+  background: linear-gradient(135deg, var(--accent), #c52222);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero-text p {
+  color: var(--text-muted);
+  max-width: 32rem;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--border-soft);
+}
+
+/* Hero imagen/panel antiguo (por si lo usa en otro lado) */
+.hero-image {
+  position: relative;
+}
+
+.hero-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(15, 23, 42, 0.8);
+  transform: translateY(0);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero-card img {
+  height: 320px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hero-card-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 0.85rem 1.1rem;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
+  font-size: 0.85rem;
+}
+
+.hero-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 70px rgba(15, 23, 42, 0.9);
+}
+
+/* Panel flotante */
+.hero-floating-panel {
+  position: absolute;
+  right: -18px;
+  bottom: 18px;
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 16px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+  font-size: 0.8rem;
+  animation: float 4s ease-in-out infinite;
+}
+
+.hero-floating-panel h3 {
+  margin: 0.2rem 0 0;
+}
+
+/* Secciones */
+.section {
+  padding: 3.5rem 0;
+}
+
+.section-alt {
+  background: radial-gradient(
+    circle at top,
+    #020617,
+    #020617 40%,
+    #050816 100%
+  );
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-size: 1.7rem;
+  margin-bottom: 0.4rem;
+}
+
+.section-header p {
+  color: var(--text-muted);
+}
+
+/* Cards */
+.cards-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card {
+  background: radial-gradient(
+    circle at top left,
+    rgba(79, 70, 229, 0.14),
+    #020617
+  );
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.3rem 1.3rem;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.8);
+  transform: translateY(0) translateZ(0);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease, background 0.25s ease;
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+}
+
+.card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.card-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  padding: 0.35rem 0.9rem;
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text-main);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.95);
+  border-color: var(--accent);
+  background: radial-gradient(
+    circle at top left,
+    rgba(79, 70, 229, 0.23),
+    #020617
+  );
+}
+
+.card:hover .card-btn {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Slider */
+.slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-soft);
+  background: rgba(15, 23, 42, 0.9);
+  padding: 1rem 0.5rem;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.slide {
+  min-width: 100%;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.slide img {
+  border-radius: 18px;
+  height: 260px;
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+}
+
+.slide h4 {
+  margin: 0;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text-main);
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  border: 1px solid var(--border-soft);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.slider-btn:hover {
+  background: rgba(229, 70, 70, 0.9);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.slider-btn.prev {
+  left: 12px;
+}
+
+.slider-btn.next {
+  right: 12px;
+}
+
+/* CTA */
+.cta {
+  text-align: center;
+}
+
+.cta-content {
+  background: radial-gradient(
+    circle at top left,
+    rgba(34, 197, 94, 0.2),
+    rgba(79, 70, 229, 0.05)
+  );
+  border-radius: 28px;
+  padding: 2.2rem 2rem;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.9);
+}
+
+.cta-content h2 {
+  margin-bottom: 0.6rem;
+}
+
+.cta-content p {
+  color: var(--text-muted);
+  max-width: 34rem;
+  margin: 0 auto 1.4rem;
+}
+
+/* Contacto */
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.contact-list li + li {
+  margin-top:
+    0.35rem;
+}
+
+.contact-form {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 22px;
+  padding: 1.8rem 1.7rem;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.95);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin-bottom: 0.8rem;
+  background: #020617;
+  border: 1px solid rgba(55, 31, 31, 0.9);
+  border-radius: 12px;
+  padding: 0.6rem 0.8rem;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.4);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid rgba(15, 23, 42, 0.9);
+  background: #020617;
+  padding: 1.2rem 0 1.4rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.footer .small {
+  opacity: 0.7;
+}
+
+/* Animaciones scroll / reveal */
+/* Si quiere animación: descomente esto y asegúrese de que el script funciona
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+*/
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Elementos flotantes de fondo */
+.floating-shape {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.shape-1 {
+  width: 260px;
+  height: 260px;
+  background: rgba(79, 70, 229, 0.4);
+  top: -40px;
+  left: -60px;
+  animation: slow-move 18s ease-in-out infinite alternate;
+}
+
+.shape-2 {
+  width: 260px;
+  height: 260px;
+  background: rgba(189, 5, 5, 0.4);
+  bottom: -60px;
+  right: -40px;
+  animation: slow-move 22s ease-in-out infinite alternate-reverse;
+}
+
+/* Keyframes generales */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slow-move {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(20px, -10px);
+  }
+
+  100% {
+    transform: translate(-10px, 20px);
+  }
+}
+
+/* Responsivo general */
+@media (max-width: 900px) {
+  .hero-grid,
+  .contact-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero {
+    padding-top: 3.2rem;
+  }
+
+  .hero-image {
+    order: -1;
+  }
+
+  .header-content {
+    gap: 1rem;
+  }
+
+  .nav {
+    display: none; /* se puede mejorar con menú hamburguesa */
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cta-content {
+    padding: 1.7rem 1.4rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 0.3rem;
+    text-align: center;
+  }
+
+  .hero.hero-multimagen {
+    padding: 5rem 0 3.5rem;
+  }
+
+  .hero-watermark {
+    transform: translate(-50%, -30%);
+    font-size: clamp(3rem, 16vw, 6rem);
+  }
+
+  .hero-overline {
+    letter-spacing: 0.18em;
+    font-size: 0.8rem;
+  }
+}
