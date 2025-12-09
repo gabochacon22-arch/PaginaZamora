@@ -22,10 +22,19 @@ body {
   margin: 0;
   font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
     sans-serif;
-  background: radial-gradient(circle at top left, #ffffff, #c20505 80%, #f5f4f3);
+
+  background:
+    radial-gradient(circle at top left, #ffffffcc, #c20505cc 80%, #f5f4f3cc),
+   url("imagenes/fondoPaginaWeb.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
 }
+
 
 img {
   max-width: 100%;
@@ -118,7 +127,7 @@ img {
 
 /* Botón de iniciar proyecto / principal */
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), #22c55e);
+  background: linear-gradient(135deg, var(--accent), #580919);
   color: white;
   box-shadow: 0 12px 30px rgba(235, 3, 3, 0.5);
 }
@@ -407,6 +416,234 @@ img {
   );
 }
 
+/* ===== SLIDER DE GALERÍA (tipo albamedia) ===== */
+/* ===== SLIDER DE GALERÍA (tipo albamedia) ===== */
+
+.section-galeria {
+  padding: 3rem 0 4rem;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.section-galeria .section-header p {
+  color: #6b7280;
+}
+
+/* Contenedor general del slider */
+.galeria-slider {
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  margin: 1.5rem auto 0;
+}
+
+/* Ventana visible */
+.galeria-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Pista que se mueve */
+.galeria-track {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.4s ease;
+}
+
+/* Cada imagen ocupa 1/3 del ancho en desktop */
+.galeria-slide {
+  flex: 0 0 calc(100% / 3);
+}
+
+.galeria-slide img {
+  width: 100%;
+  height: 420px;           /* ajuste a su gusto */
+  object-fit: cover;
+  display: block;
+}
+
+/* Botones flecha */
+.galeria-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(15, 23, 42, 0.85);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.6);
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 5;
+}
+
+.galeria-btn.prev {
+  left: -10px;
+}
+
+.galeria-btn.next {
+  right: -10px;
+}
+
+.galeria-btn:hover {
+  background: rgba(220, 38, 38, 0.95);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* Responsivo: en pantallas pequeñas, 1 imagen por vista */
+@media (max-width: 900px) {
+  .galeria-slide {
+    flex: 0 0 100%;
+  }
+
+  .galeria-btn.prev {
+    left: 4px;
+  }
+
+  .galeria-btn.next {
+    right: 4px;
+  }
+}
+
+
+
+
+
+#servicios {
+  position: relative;
+  padding: 3.5rem 0;
+
+  background-image:
+    linear-gradient(
+    rgba(120, 0, 0, 0.75),   /* rojo oscuro semi-transparente arriba */
+    rgba(80, 0, 0, 0.85),    /* más opaco a la mitad */
+    rgba(60, 0, 0, 0.92) 
+    ),
+    url("imagenes/fondoPagina.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  
+}
+
+#servicios::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: inherit;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+
+/* Sección blanca con diagonales rojas arriba y abajo */
+.section-diagonal {
+  position: relative;
+  padding: 5rem 0 4rem;
+  background: #ffffff;
+  color: #0f172a;
+  overflow: hidden;
+}
+
+/* Franja/triángulo superior apuntando hacia abajo */
+.section-diagonal::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -80px;         /* cuánto se mete sobre la sección anterior */
+  height: 120px;
+  background-image:
+    linear-gradient(
+      rgba(120, 0, 0, 0.90),
+      rgba(60, 0, 0, 0.95)
+    );
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 40%, 0 100%);
+  z-index: -1;
+}
+
+/* Franja/triángulo inferior apuntando hacia arriba */
+.section-diagonal::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -80px;      /* cuánto se mete sobre la sección siguiente */
+  height: 120px;
+  background-image:
+    linear-gradient(
+      rgba(120, 0, 0, 0.95),
+      rgba(60, 0, 0, 0.98)
+    );
+  clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);
+  z-index: -1;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-image img {
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #0f172a;
+}
+
+.about-text p {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.about-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-bottom: 1.7rem;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #b91c1c;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 1fr);
+    text-align: center;
+  }
+
+  .about-stats {
+    justify-content: center;
+  }
+}
+
+
 .section-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -423,21 +660,35 @@ img {
 
 /* Cards */
 .cards-grid {
+  transition: opacity 0.99s ease, transform 0.99s ease, filter 0.99s ease;
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* Cuando se ocultan: se agrandan un poco, suben y se desenfocan */
+.cards-grid.oculta {
+  opacity: 0;
+  transform: translateY(-25px) scale(1.05); /* “vuela” hacia adelante/arriba */
+  filter: blur(6px);
+}
+
+/* Para que ya no ocupen espacio después de la animación */
+.cards-grid.escondida {
+  display: none;
+}
+
+
 .card {
   background: radial-gradient(
     circle at top left,
-    rgba(79, 70, 229, 0.14),
+    rgba(230, 19, 54, 0.89),
     #020617
   );
   border-radius: var(--radius-lg);
   padding: 1.4rem 1.3rem 1.3rem;
   border: 1px solid var(--border-soft);
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.8);
+  box-shadow: 0 20px 50px rgba(209, 15, 89, 0.877);
   transform: translateY(0) translateZ(0);
   transition: transform 0.25s ease, box-shadow 0.25s ease,
     border-color 0.25s ease, background 0.25s ease;
@@ -458,7 +709,7 @@ img {
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.6);
   padding: 0.35rem 0.9rem;
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(16, 23, 39, 0.85);
   color: var(--text-main);
   font-size: 0.78rem;
   cursor: pointer;
@@ -467,12 +718,12 @@ img {
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.95);
+  box-shadow: 0 30px 80px rgba(182, 178, 176, 0.95);
   border-color: var(--accent);
   background: radial-gradient(
     circle at top left,
-    rgba(79, 70, 229, 0.23),
-    #020617
+    rgba(94, 5, 5, 0.979),
+    #9b2203
   );
 }
 
@@ -480,6 +731,40 @@ img {
   border-color: var(--accent);
   background: var(--accent-soft);
 }
+
+/* ======== Galerías por servicio (Rótulos, Vallas, Rotulación interna) ======== */
+
+/* Todas las galerías empiezan ocultas */
+.galeria-servicio {
+  display: none;
+  margin-top: 2rem;
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);   /* un poco abajo y pequeña */
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+/* Cuando se activan: aparecen con animación suave */
+.galeria-servicio.activa {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Grid de imágenes dentro de la galería */
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.galeria-grid img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
 
 /* Slider */
 .slider {
@@ -765,3 +1050,68 @@ img {
     font-size: 0.8rem;
   }
 }
+
+/* ===== SECCIÓN DE MARCAS / LOGOS ===== */
+
+.section-brands {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 4rem 0 5rem;
+}
+
+.brands-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin: 0 0 3rem;
+}
+
+/* Contenedor de los logos (dos filas centradas) */
+.brands-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem 4rem; /* vertical / horizontal */
+}
+
+/* Estilo de cada logo */
+.brands-logos img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  filter: grayscale(30%);
+  opacity: 0.9;
+  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hover similar al sitio de ejemplo */
+.brands-logos img:hover {
+  transform: translateY(-4px);
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .brands-title {
+    font-size: 1.8rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .brands-logos {
+    gap: 2rem 2.5rem;
+  }
+
+  .brands-logos img {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .brands-logos img {
+    max-width: 100px;
+  }
+}
+

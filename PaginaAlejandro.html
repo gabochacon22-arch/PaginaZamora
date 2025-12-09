@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+  <head> 
     <link rel="icon" type="image/png" href="imagenes/logo_multiIcono.png">
 
     <meta charset="UTF-8" />
@@ -38,156 +38,343 @@
       </div>
     </header>
 
-    <div class ="joinchat_button">
-      <div class = "joinchat_button_open"></div>
-    </div>
-
-<!--CAMBIAR ESTO-->
 
         <!-- HERO NUEVO CON VIDEO DE FONDO -->
-<section id="inicio" class="hero hero-multimagen">
-  <!-- Video de fondo -->
-  <video class="hero-video" autoplay muted loop playsinline>
-  <source src="videos/testeo.mp4" type="video/mp4" />
-</video>
+    <section id="inicio" class="hero hero-multimagen">
+      <!-- Video de fondo -->
+      <video class="hero-video" autoplay muted loop playsinline>
+      <source src="videos/testeo.mp4" type="video/mp4" />
+    </video>
 
-  <!-- Capa roja encima del video (cortina tipo sitio original) -->
-  <div class="hero-overlay"></div>
+      <!-- Capa roja encima del video (cortina tipo sitio original) -->
+      <div class="hero-overlay"></div>
 
-  <div class="container hero-multimagen-content reveal">
-    <p class="hero-overline">IMPRESIONES Y ROTULACIONES</p>
+      <div class="container hero-multimagen-content reveal">
+        <p class="hero-overline">IMPRESIONES Y ROTULACIONES</p>
 
-    <h1 class="hero-title">
-      QUE HABLAN
-      <span class="hero-animated-words">
-        <span class="word">POR TU MARCA.</span>
-        <span class="word">EN GRANDE.</span>
-        <span class="word">CON IMPACTO.</span>
-      </span>
-    </h1>
+        <h1 class="hero-title">
+          QUE HABLAN
+          <span class="hero-animated-words">
+            <span class="word">POR TU MARCA.</span>
+            <span class="word">EN GRANDE.</span>
+            <span class="word">CON IMPACTO.</span>
+          </span>
+        </h1>
 
-    <p class="hero-subtitle">
-      Somos una de las compañías costarricenses de mayor prestigio en el sector
-      de la imagen y la publicidad exterior, transformando cada espacio en una
-      experiencia visual inolvidable.
-    </p>
+        <p class="hero-subtitle">
+          Somos una de las compañías costarricenses de mayor prestigio en el sector
+          de la imagen y la publicidad exterior, transformando cada espacio en una
+          experiencia visual inolvidable.
+        </p>
 
-    <div class="hero-actions hero-actions-center">
-      <button class="btn btn-primary">Contáctenos</button>
+        <div class="hero-actions hero-actions-center">
+          <button class="btn btn-primary">Contáctenos</button>
+        </div>
+      </div>
+    </section>
+    <!--hasta aquí-->
+
+    <!-- GALERÍA TIPO ALBAMEDIA -->
+<section id="galeria" class="section section-galeria">
+  <div class="container section-header">
+    <h2>Algunos de nuestros rótulos</h2>
+    <p>Deslice para ver más proyectos realizados.</p>
+  </div>
+
+  <div class="galeria-slider">
+    <button class="galeria-btn prev">&#10094;</button>
+
+    <div class="galeria-viewport">
+      <div class="galeria-track">
+        <!-- Cada .galeria-slide es una foto -->
+        <div class="galeria-slide">
+          <img src="imagenes/galeria1.jpg" alt="Proyecto 1">
+        </div>
+        <div class="galeria-slide">
+          <img src="imagenes/galeria2.jpg" alt="Proyecto 2">
+        </div>
+        <div class="galeria-slide">
+          <img src="imagenes/galeria3.jpg" alt="Proyecto 3">
+        </div>
+        <div class="galeria-slide">
+          <img src="imagenes/galeria4.jpg" alt="Proyecto 4">
+        </div>
+        <div class="galeria-slide">
+          <img src="imagenes/galeria5.jpg" alt="Proyecto 5">
+        </div>
+        <div class="galeria-slide">
+          <img src="imagenes/galeria6.jpg" alt="Proyecto 6">
+        </div>
+        <!-- agregue más div.galeria-slide con sus imágenes -->
+      </div>
     </div>
+    <button class="galeria-btn next">&#10095;</button>
   </div>
 </section>
-<!--hasta aquí-->
+
 
     <!-- SERVICIOS / PANELES -->
     <section id="servicios" class="section">
-      <div class="container">
-        <div class="section-header reveal">
-          <h1>Servicios que ofrecemos</h1>
-          <p>
-            Paneles claros, tipografía limpia y detalles interactivos pensados
-            para usted.
-          </p>
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Lo que hacemos</h2>
+      <p>
+        Paneles claros, tipografía limpia y detalles interactivos pensados
+        para usted.
+      </p>
+    </div>
+
+    <!-- BLOQUE 1: los tres cards normales -->
+    <div class="cards-grid" id="cardsServicios">
+      <article class="card reveal">
+        <h3>Rótulos luminosos</h3>
+        <p>Ofrecemos productos de gran calidad y excelente exposición, construidos en una 
+          amplia gama de materiales como aluminio, acero e hierro. También ofrecemos diversos sustratos a elegir, 
+          como lona, acrílico y policarbonato, con rotulaciones digitales de alta calidad o vinilo de corte. 
+          Además, los productos pueden ser iluminados con fluorescentes, LEDs o neón.</p>
+        <button class="card-btn ver-galeria" data-galeria="luminosos">
+          Más detalles
+        </button>
+      </article>
+
+      <article class="card reveal">
+        <h3>Vallas</h3>
+        <p>La exposición en carretera es una de las maneras más efectivas de llegar a sus consumidores.
+          Ya sea en venta directa o en alquiler, las vallas publicitarias pueden ser su aliado más fiel 
+          en el camino hacia la proyección exitosa de su negocio.</p>
+        <button class="card-btn ver-galeria" data-galeria="vallas">
+          Ver ejemplos
+        </button>
+      </article>
+
+      <article class="card reveal">
+        <h3>Rotulación interna</h3>
+        <p>Nuestra División Industrial ejecuta proyectos integrales de imagen corporativa, cumpliendo 
+          con los más estrictos criterios de servicio y calidad. Contamos con la estructura necesaria 
+          para garantizar el seguimiento perfecto de cada fase del proyecto, desde el inicio de la relación
+          con el cliente hasta la instalación y puesta en marcha del último elemento.</p>
+        <button class="card-btn ver-galeria" data-galeria="interna">
+          Cómo funciona
+        </button>
+      </article>
+
+      <article class="card reveal">
+        <h3>Impresión Digital</h3>
+        <p>Nuestro departamento especializado ofrece servicios de impresión de gran formato con tecnología digital avanzada. 
+          Aplicamos técnicas versátiles y creativas en materiales duraderos, garantizando imágenes a todo color para diversas 
+          aplicaciones, desde carteles promocionales hasta proyectos de gran formato.</p>
+        <button class="card-btn ver-galeria" data-galeria="vallas">
+          Ver ejemplos
+        </button>
+      </article>
+
+      <article class="card reveal">
+        <h3>Letras de Relieve</h3>
+        <p>Ofrecemos servicios de Ruteo Electrónico para cortar y dar forma a materiales como madera, hierro, acero, aluminio, 
+          PVC, acrílico y policarbonato. Estos materiales se utilizan para fabricar letras corpóreas, señalética interna y productos P.O.P.</p>
+        <button class="card-btn ver-galeria" data-galeria="vallas">
+          Ver ejemplos
+        </button>
+      </article>
+
+      <article class="card reveal">
+        <h3>Sistema de Exhibición Modulares</h3>
+        <p>En Multimagen le diseñamos, construimos o le traemos mediante catalogo una gran cantidad de modelos de sistemas de exhibicion 
+          modulares tales como stands para ferias, bases para banners, porta carteles, fondos para presentacion etc.</p>
+        <button class="card-btn ver-galeria" data-galeria="vallas">
+          Ver ejemplos
+        </button>
+      </article>
+
+      <article class="card reveal">
+        <h3>Eventos Especiales</h3>
+        <p>Nuestra plataforma de servicios para eventos especiales, esta enfocada en brindar a nuestros clientes toda clase de productos y 
+          facilidades destinadas a implementar de la mejor manera posible su evento o actividad publicitario o promocional.</p>
+        <button class="card-btn ver-galeria" data-galeria="vallas">
+          Ver ejemplos
+        </button>
+      </article>
+
+      <article class="card reveal">
+        <h3>Merchandsing</h3>
+        <p>Está comprobado que el proceso de compra es mayormente visual, ya que la vista representa el 80% de la percepción humana, 
+          el oído un 10% y el resto de los sentidos otro 10%. Por esta razón, es crucial acercar los productos al cliente de manera 
+          visual y tangible. Un buen plan de merchandising y productos específicos son herramientas esenciales para lograr este objetivo.</p>
+        <button class="card-btn ver-galeria" data-galeria="vallas">
+          Ver ejemplos
+        </button>
+      </article>
+
+      <article class="card reveal">
+        <h3>Publicidad Móvil</h3>
+        <p>Para su evento especial o simplemente para llevar su marca hasta el lugar que usted guste, le brindamos la posibilidad de contratar 
+          nuestra valla movil, uno de los medios alternativos más eficacez en el manejo de campañas publicitarias, nuestra empresa ofrece este 
+          servicio a todo lo largo y ancho del territorio Nacional.</p>
+        <button class="card-btn ver-galeria" data-galeria="vallas">
+          Ver ejemplos
+        </button>
+      </article>
+
+    </div>
+
+    <!-- BLOQUE 1: galería de Rótulos luminosos -->
+    <div class="galeria-servicio" id="galeria-luminosos">
+      <h3>Rótulos luminosos</h3>
+      <div class="galeria-grid">
+        <img src="imagenes/imagen1RM.jpg" alt="Rótulo luminoso 1">
+        <img src="imagenes/imagen2RM.jpg" alt="Rótulo luminoso 2">
+        <img src="imagenes/imagen3RM.jpg" alt="Rótulo luminoso 3">
+      </div>
+      <button class="btn btn-outline btn-volver">← Volver a servicios</button>
+    </div>
+
+    <!-- BLOQUE 2: galería de Vallas Publicitarias -->
+    <div class="galeria-servicio" id="galeria-vallas">
+      <h3>Vallas publicitarias</h3>
+      <div class="galeria-grid">
+        <img src="imagenes/imagen1V.jpg" alt="Valla 1">
+        <img src="imagenes/imagen2V.jpg" alt="Valla 2">
+      </div>
+      <button class="btn btn-outline btn-volver">← Volver a servicios</button>
+    </div>
+
+    <!-- BLOQUE 3: galería de Rotulación interna -->
+    <div class="galeria-servicio" id="galeria-interna">
+      <h3>Rotulación interna</h3>
+      <div class="galeria-grid">
+        <img src="imagenes/interna1RN.jpg" alt="Rotulación interna 1">
+        <img src="imagenes/interna2RN.jpg" alt="Rotulación interna 2">
+      </div>
+      <button class="btn btn-outline btn-volver">← Volver a servicios</button>
+    </div>
+
+    <!-- BLOQUE 4: galería de Impresión Digital -->
+    <div class="galeria-servicio" id="galeria-interna">
+      <h3>Impresión Digital</h3>
+      <div class="galeria-grid">
+        <img src="imagenes/interna1ID.jpg" alt="Impresión Digital 1">
+        <img src="imagenes/interna2ID.jpg" alt="Impresión Digital 2">
+      </div>
+      <button class="btn btn-outline btn-volver">← Volver a servicios</button>
+    </div>
+
+    <!-- BLOQUE 5: galería de Letras de Relieve -->
+    <div class="galeria-servicio" id="galeria-interna">
+      <h3>Letras de Relieve </h3>
+      <div class="galeria-grid">
+        <img src="imagenes/interna1LR.jpg" alt="Letras de Relieve 1">
+        <img src="imagenes/interna2LR.jpg" alt="Letras de Relieve 2">
+      </div>
+      <button class="btn btn-outline btn-volver">← Volver a servicios</button>
+    </div>
+
+    <!-- BLOQUE 6: galería de Sistemas de Exhibición Modulares -->
+    <div class="galeria-servicio" id="galeria-interna">
+      <h3>Sistemas de Exhibición Modulares</h3>
+      <div class="galeria-grid">
+        <img src="imagenes/interna1SEM.jpg" alt="Sistemas de Exhibición Modulares 1">
+        <img src="imagenes/interna2SEM.jpg" alt="Sistemas de Exhibición Modulares 2">
+      </div>
+      <button class="btn btn-outline btn-volver">← Volver a servicios</button>
+    </div>
+
+    <!-- BLOQUE 7: galería de Eventos Especiales -->
+    <div class="galeria-servicio" id="galeria-interna">
+      <h3>Eventos Especiales</h3>
+      <div class="galeria-grid">
+        <img src="imagenes/interna1EE.jpg" alt="Eventos Especiales 1">
+        <img src="imagenes/interna2EE.jpg" alt="Eventos Especiales 2">
+      </div>
+      <button class="btn btn-outline btn-volver">← Volver a servicios</button>
+    </div>
+
+    <!-- BLOQUE 8: galería de Merchandising -->
+    <div class="galeria-servicio" id="galeria-interna">
+      <h3>Merchandising </h3>
+      <div class="galeria-grid">
+        <img src="imagenes/interna1M.jpg" alt="Merchandising 1">
+        <img src="imagenes/interna2M.jpg" alt="Merchandising 2">
+      </div>
+      <button class="btn btn-outline btn-volver">← Volver a servicios</button>
+    </div>
+
+    <!-- BLOQUE 9: galería de Publicidad Móvil interna -->
+    <div class="galeria-servicio" id="galeria-interna">
+      <h3>Publicidad Móvil interna</h3>
+      <div class="galeria-grid">
+        <img src="imagenes/interna1PM.jpg" alt="Publicidad Móvil interna 1">
+        <img src="imagenes/interna2PM.jpg" alt="Publicidad Móvil interna 2">
+      </div>
+      <button class="btn btn-outline btn-volver">← Volver a servicios</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN INTERMEDIA TIPO MULTIIMAGEN -->
+<section id="sobre-nosotros" class="section section-diagonal">
+  <div class="container about-grid">
+    
+    <div class="about-image">
+      <img src="imagenes/breteador.avif" alt="Equipo de trabajo Multiimagen">
+    </div>
+
+    <div class="about-text">
+      <h2>Estamos aquí para ayudarte</h2>
+      <p>
+        En Multiimagen, con más de 30 años de experiencia en el sector,
+        entendemos la importancia de una imagen profesional y de calidad
+        para su negocio. Nuestro equipo le acompaña en cada etapa del
+        proyecto, desde el diseño hasta la instalación final.
+      </p>
+
+      <div class="about-stats">
+        <div class="stat">
+          <span class="stat-number">30+</span>
+          <span class="stat-label">Años de experiencia</span>
         </div>
-
-        <div class="cards-grid">
-          <article class="card reveal"> <!--El "article" agrupa contenido independiente, o sea, bloques que tienen sentido por sí solos-->
-            <h2>Rótulos Luminosos<h2>
-            <p>
-              Ofrecemos productos de gran calidad y excelente exposición, construidos en una amplia gama 
-              de materiales como aluminio, acero e hierro. También ofrecemos diversos sustratos a elegir, 
-              como lona, acrílico y policarbonato, con rotulaciones digitales de alta calidad o vinilo de 
-              corte. Además, los productos pueden ser iluminados con fluorescentes, LEDs o neón.
-            </p>
-            <button class="card-btn">Más detalles</button>
-          </article>
-
-          <article class="card reveal">
-            <h2>Vallas</h2>
-            <p>
-              La exposición en carretera es una de las maneras más efectivas de llegar a sus consumidores. 
-              Ya sea en venta directa o en alquiler, las vallas publicitarias pueden ser su aliado más fiel en el 
-              camino hacia la proyección exitosa de su negocio.
-            </p>
-              <button class="card-btn">Ver ejemplos</button>
-          </article>
-
-          <article class="card reveal">
-            <h2>Rotulación interna</h2>
-            <p>
-              Nuestra División Industrial ejecuta proyectos integrales de imagen corporativa, cumpliendo con los 
-              más estrictos criterios de servicio y calidad. Contamos con la estructura necesaria para garantizar el 
-              seguimiento perfecto de cada fase del proyecto, desde el inicio de la relación con el cliente hasta la 
-              instalación y puesta en marcha del último elemento.
-            </p>
-            <button class="card-btn">Cómo funciona</button>
-          </article>
-
-          <article class = "card reveal">
-            <h2>Impresión Digital</h2>
-            <p>Nuestro departamento especializado ofrece servicios de impresión de gran formato 
-              con tecnología digital avanzada. Aplicamos técnicas versátiles y creativas en materiales 
-              duraderos, garantizando imágenes a todo color para diversas aplicaciones, desde carteles 
-              promocionales hasta proyectos de gran formato.</p>
-              <button class = "card-btn">Ver ejemplos</button>
-          </article>
-
-          <article class = "card reveal">
-            <h2>Letras de Relieve</h2>
-            <p>Ofrecemos servicios de Ruteo Electrónico para cortar y dar forma a materiales como 
-              madera, hierro, acero, aluminio, PVC, acrílico y policarbonato. Estos materiales se 
-              utilizan para fabricar letras corpóreas, señalética interna y productos P.O.P. </p>
-              <button class = "card-btn">Ver ejemplos</button>
-            </article>
-
-            <article class = "card reveal">
-              <h2> Sistemas de Exhibición Modulares</h2>
-              <p>En Multimagen le diseñamos, construimos o le traemos mediante catalogo una gran 
-                cantidad de modelos de sistemas de exhibicion modulares tales como stands para ferias, 
-                bases para banners, porta carteles, fondos para presentacion etc.</p>
-                <button class = "card-btn">Ver ejemoplos</button>
-            </article>
+        <div class="stat">
+          <span class="stat-number">100+</span>
+          <span class="stat-label">Clientes satisfechos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">900+</span>
+          <span class="stat-label">Rótulos instalados</span>
         </div>
       </div>
-    </section>
 
-    <!-- PROYECTOS con slider simple -->
-    <section id="proyectos" class="section section-alt">
-      <div class="container">
-        <div class="section-header reveal">
-          <h2>Algunos proyectos</h2>
-          <p>Deslice para ver ejemplos de estilos limpios y modernos.</p>
-        </div>
+      <button class="btn btn-primary">Contáctenos</button>
+    </div>
 
-        <div class="slider">
-          <button class="slider-btn prev">&#10094;</button>
-          <div class="slider-track">
-            <div class="slide">
-              <img
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=80"
-                alt="Proyecto web 1"
-              />
-              <h4>Plataforma SaaS minimalista</h4>
-            </div>
-            <div class="slide">
-              <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80"
-                alt="Proyecto web 2"
-              />
-              <h4>Sitio de agencia creativa</h4>
-            </div>
-            <div class="slide">
-              <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80"
-                alt="Proyecto web 3"
-              />
-              <h4>Landing page para startup</h4>
-            </div>
-          </div>
-          <button class="slider-btn next">&#10095;</button>
-        </div>
-      </div>
-    </section>
+  </div>
+</section>
+
+
+    <!-- MARCAS / CLIENTES -->
+<section id="proyectos" class="section section-brands">
+  <div class="container">
+    <h2 class="brands-title">Marcas que han confiado en Multiimagen:</h2>
+
+    <div class="brands-logos">
+      <!-- FILA 1 -->
+      <img src="imagenes/logoIce.png"    alt="Holcim">
+      <img src="imagenes/cocacolalogo.png" alt="Telecable">
+      <img src="imagenes/logobcrRojo.png"     alt="Kamuk School">
+      <img src="imagenes/davivienda.png"      alt="KOAJ">
+      <img src="imagenes/logobnRojo.png"  alt="Imperial">
+      <img src="imagenes/logo-labomba.png"   alt="La Bomba Farmacia">
+
+      <!-- FILA 2 -->
+      <img src="imagenes/logo-laica.png"     alt="LAICA">
+      <img src="imagenes/logo-monifai.png"   alt="Monifai">
+      <img src="imagenes/logo-off.png"       alt="OFF!">
+      <img src="imagenes/logo-castro.png"    alt="Universidad Castro Carazo">
+      <img src="imagenes/logo-ulatina.png"   alt="Universidad Latina">
+      <img src="imagenes/logo-monge.png"     alt="Monge">
+    </div>
+  </div>
+</section>
+
 
     <!-- CTA -->
     <section class="section cta">
@@ -234,10 +421,10 @@
     <footer class="footer">
       <div class="container footer-content">
         <p>© 2025 Multiimagen. Todos los derechos reservados.</p>
-        <p class="small">Desarrollado por Jose Gabriel Chacón</p>
+        <p class="small">Desarrollado por Jeffry Quesada Quesada</p>
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="funciones.js"></script>
   </body>
 </html>
