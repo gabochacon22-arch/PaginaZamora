@@ -4,8 +4,8 @@
   --card-bg: #0f172a;
   --accent: rgb(255, 0, 0);
   --accent-soft: rgba(79, 70, 229, 0.15);
-  --text-main: #e5e7eb;
-  --text-muted: #9ca3af;
+  --text-main: #ebe5e5;
+  --text-muted: #000000;
   --border-soft: rgba(112, 6, 107, 0.3);
   --radius-lg: 18px;
   --radius-xl: 24px;
@@ -18,13 +18,43 @@
   box-sizing: border-box;
 }
 
+/* Header fijo */
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  transition: transform .28s ease, opacity .28s ease;
+}
+
+/* Oculto */
+.header.header-hide{
+  transform: translateY(-110%);
+  opacity: 0;
+}
+
+/* El body YA NO tiene padding fijo */
+body{
+  padding-top: 0;
+  transition: padding-top .25s ease;
+}
+
+/* Solo cuando el header está visible */
+body.header-visible{
+  padding-top: 90px; /* altura real del header */
+}
+
+
+
+
 body {
   margin: 0;
   font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
     sans-serif;
 
   background:
-    radial-gradient(circle at top left, #ffffffcc, #c20505cc 80%, #f5f4f3cc),
+    radial-gradient(circle at top left, #ffffffcc, #c20505cc 80%, #750000),
    url("imagenes/fondoPaginaWeb.png");
 
   background-size: cover;
@@ -56,8 +86,8 @@ img {
   backdrop-filter: blur(1323px);
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.95),
-    rgb(184, 178, 178),
+    rgb(155, 0, 0,),
+    rgb(172, 146, 146),
     transparent
   );
 }
@@ -70,9 +100,7 @@ img {
 }
 
 .logo {
-  /* Ajusta estos valores según qué tan pequeño lo quieres. */
-  /* Por ejemplo, 180px de ancho y altura automática: */
-  width: 180px; 
+  width: 140px; /* ajusta el tamaño del logo */
   height: auto;
   /* La imagen del logo en el header no debe tener border-radius */
   border-radius: 0;
@@ -200,8 +228,6 @@ img {
   );
   z-index: 1;
 }
-
-
 
 .hero-multimagen-content {
   position: relative;
@@ -416,83 +442,79 @@ img {
   );
 }
 
-/* ===== SLIDER DE GALERÍA (tipo albamedia) ===== */
-/* ===== SLIDER DE GALERÍA (tipo albamedia) ===== */
-
-.section-galeria {
-  padding: 3rem 0 4rem;
-  background: #ffffff;
-  color: #0f172a;
+/* ========================== SLIDER DE GALERÍA ========================== */
+/*   GALERÍAS: quitar “espacio enorme”
+   (deje SOLO esta versión de .galeria-servicio en todo el CSS)
+========================= */
+.galeria-servicio{
+  display:none;
+  margin-top: 1.2rem;          /* antes 2rem */
+  opacity:0;
+  transform: translateY(14px) scale(.98);
+  transition: opacity .6s ease, transform .6s ease;
 }
 
-.section-galeria .section-header p {
-  color: #6b7280;
+.galeria-servicio.activa{
+  display:block;
+  opacity:1;
+  transform: translateY(0) scale(1);
 }
 
-/* Contenedor general del slider */
-.galeria-slider {
-  position: relative;
-  width: 100%;
-  max-width: 1120px;
-  margin: 1.5rem auto 0;
-}
 
-/* Ventana visible */
+/* Contenedor que SE DESPLAZA (scroll horizontal) */
 .galeria-viewport {
-  overflow: hidden;
-  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
 }
 
-/* Pista que se mueve */
+/* Ocultar scrollbar */
+.galeria-viewport::-webkit-scrollbar {
+  display: none;
+}
+.galeria-viewport {
+  scrollbar-width: none;
+}
+
+/* Mientras se arrastra con el mouse */
+.galeria-viewport.dragging {
+  cursor: grabbing;
+  scroll-behavior: auto; /* sin animación mientras arrastra */
+}
+
+/* Pista con las imágenes */
 .galeria-track {
   display: flex;
   flex-wrap: nowrap;
-  transition: transform 0.4s ease;
 }
 
-/* Cada imagen ocupa 1/3 del ancho en desktop */
+/* Cada slide ocupa 1/3 del ancho en desktop */
 .galeria-slide {
   flex: 0 0 calc(100% / 3);
+  scroll-snap-align: start;
 }
 
 .galeria-slide img {
   width: 100%;
-  height: 420px;           /* ajuste a su gusto */
-  object-fit: cover;
+  height: auto; /* permitir que la imagen conserve su proporción */
+  object-fit: contain; /* mostrar la imagen completa sin recortar */
   display: block;
 }
 
-/* Botones flecha */
-.galeria-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  background: rgba(15, 23, 42, 0.85);
-  color: #fff;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  font-size: 1.3rem;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.6);
-  transition: transform 0.2s ease, background 0.2s ease;
-  z-index: 5;
-}
+/* Responsivo: en móvil solo se ve 1 por pantalla */
+@media (max-width: 900px) {
+  .galeria-slide {
+    flex: 0 0 100%;
+  }
 
-.galeria-btn.prev {
-  left: -10px;
-}
-
-.galeria-btn.next {
-  right: -10px;
-}
-
-.galeria-btn:hover {
-  background: rgba(220, 38, 38, 0.95);
-  transform: translateY(-50%) scale(1.05);
+  .galeria-slide img {
+    height: auto;
+  }
 }
 
 /* Responsivo: en pantallas pequeñas, 1 imagen por vista */
@@ -510,10 +532,6 @@ img {
   }
 }
 
-
-
-
-
 #servicios {
   position: relative;
   padding: 3.5rem 0;
@@ -529,20 +547,29 @@ img {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  
 }
 
-#servicios::before {
-  content: "";
-  position: absolute;
-  top: -80px;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: inherit;
-  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+/* Header de la sección Servicios */
+#servicios .section-header {
+  transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
 }
+
+/* Cuando se oculta (al abrir una galería) */
+#servicios .section-header.oculta {
+  opacity: 0;
+  transform: translateY(-15px) scale(1.02);
+  filter: blur(4px);
+}
+
+/* Cuando ya no debe ocupar espacio */
+#servicios .section-header.escondida {
+  display: none;
+}
+
+
+
+
+
 
 
 /* Sección blanca con diagonales rojas arriba y abajo */
@@ -554,39 +581,6 @@ img {
   overflow: hidden;
 }
 
-/* Franja/triángulo superior apuntando hacia abajo */
-.section-diagonal::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -80px;         /* cuánto se mete sobre la sección anterior */
-  height: 120px;
-  background-image:
-    linear-gradient(
-      rgba(120, 0, 0, 0.90),
-      rgba(60, 0, 0, 0.95)
-    );
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 40%, 0 100%);
-  z-index: -1;
-}
-
-/* Franja/triángulo inferior apuntando hacia arriba */
-.section-diagonal::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -80px;      /* cuánto se mete sobre la sección siguiente */
-  height: 120px;
-  background-image:
-    linear-gradient(
-      rgba(120, 0, 0, 0.95),
-      rgba(60, 0, 0, 0.98)
-    );
-  clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);
-  z-index: -1;
-}
 
 .about-grid {
   display: grid;
@@ -709,7 +703,7 @@ img {
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.6);
   padding: 0.35rem 0.9rem;
-  background: rgba(16, 23, 39, 0.85);
+  background: rgba(39, 18, 16, 0.85);
   color: var(--text-main);
   font-size: 0.78rem;
   cursor: pointer;
@@ -731,7 +725,38 @@ img {
   border-color: var(--accent);
   background: var(--accent-soft);
 }
+/* Card ROJA */
+.card-roja {
+  background: radial-gradient(
+    circle at top left,
+    rgba(220, 38, 38, 0.95),
+    #7f1d1d
+  );
+}
 
+/* Card BLANCA */
+.card-blanca {
+  background: #ffffff;
+  color: #8b0c0c;
+}
+
+/* Texto dentro de card blanca */
+.card-blanca p {
+  color: #513737;
+}
+
+/* Hover especiales */
+.card-roja:hover {
+  background: radial-gradient(
+    circle at top left,
+    rgba(158, 87, 87, 0.98),
+    #ff0909
+  );
+}
+
+.card-blanca:hover {
+  background: #f3f4f6;
+}
 /* ======== Galerías por servicio (Rótulos, Vallas, Rotulación interna) ======== */
 
 /* Todas las galerías empiezan ocultas */
@@ -1021,6 +1046,28 @@ img {
   }
 }
 
+/* SECCIÓN GALERÍA INICIAL - EXPANDIR AL FULL WIDTH */
+.section-galeria {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 2rem 0;
+  background: transparent;
+}
+
+.section-galeria .container {
+  max-width: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.section-galeria .galeria-slider {
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .cards-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -1115,3 +1162,177 @@ img {
   }
 }
 
+/* ===== BOTÓN FLOTANTE WHATSAPP ===== */
+.whatsapp-button {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  width: 62px;
+  height: 62px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 6px 25px rgba(0,0,0,0.25);
+  z-index: 999;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.whatsapp-button img {
+  width: 90px;
+  height: 66px;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.12);
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.35);
+}
+
+
+.whatsapp-button {
+  animation: glow 2s infinite ease-in-out;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 0px rgba(0, 92, 34, 0.4); }
+  50% { box-shadow: 0 0 18px rgba(37,211,102,0.9); }
+  100% { box-shadow: 0 0 0px rgba(255, 2, 2, 0.4); }
+}
+
+/* =============================== SECCION PARA LOS BOTONES DE LOS CARDS =============================== 
+   ESTILOS ESPECIALES PARA CARDS BLANCA Y ROJA
+ Centrar contenido de la card blanca también */
+.card-blanca {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Asegurar que la imagen quede bien */
+.card-blanca img {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 0.75rem;
+}
+
+/* Centrar el botón */
+.card-blanca .card-btn {
+  margin-top: 0.75rem;
+  align-self: center;
+}
+
+/* Centrar contenido de la card roja */
+.card-roja {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* centra horizontalmente */
+  text-align: center;   /* centra el texto del h3 */
+}
+
+/* Que la imagen se mantenga bien dentro del ancho de la card */
+.card-roja img {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 0.75rem;
+}
+
+/* Botón un poco más abajo y centrado */
+.card-roja .card-btn {
+  margin-top: 0.75rem;
+  align-self: center;
+}
+
+
+/* ===============================
+   VEHICULAR: TEXTO ARRIBA, SLIDER ABAJO (como Albamedia)
+=============================== */
+
+#galeria-vehicular .galeria-grid{
+  display: flex;              /* pisa su grid de 2 columnas */
+  flex-direction: column;     /* 1 columna: arriba texto, abajo slider */
+  gap: 1.25rem;
+}
+
+/* Texto full ancho */
+#galeria-vehicular .vehicular-texto{
+  max-width: 920px;
+}
+
+/* Slider full ancho y grande */
+#galeria-vehicular .vehicular-slider{
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* viewport horizontal */
+#galeria-vehicular .vehicular-viewport{
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-radius: 28px;
+}
+#galeria-vehicular .vehicular-viewport::-webkit-scrollbar{ display:none; }
+
+/* Track: 2 “columnas” visibles en desktop */
+#galeria-vehicular .vehicular-track{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 1.2rem) / 2); /* 2 visibles */
+  gap: 1.2rem;
+  padding: .5rem;
+}
+
+/* Panel grande */
+#galeria-vehicular .vehicular-item{
+  scroll-snap-align: start;
+  height: 520px;
+  border-radius: 28px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* móvil: 1 visible */
+@media (max-width: 900px){
+  #galeria-vehicular .vehicular-track{
+    grid-auto-columns: 100%;
+  }
+  #galeria-vehicular .vehicular-item{
+    height: 380px;
+  }
+}
+
+/* Aumentar tamaño específico para slides inicio1/inicio2 */
+.galeria-slide.galeria-slide--large {
+  flex: 0 0 62vw !important; /* ocupar 65% del viewport - AUMENTAR ESTE NÚMERO para más ancho */
+  scroll-snap-align: start;
+}
+
+.galeria-slide.galeria-slide--large img {
+  width: 100%;
+  height: 600px; /* AUMENTAR ESTE NÚMERO para más altura (ej: 650px, 700px) */
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 0;
+  display: block;
+  background: transparent;
+  padding: 0;
+}
+
+/* Ajustes responsivos: en móvil seguir 100% */
+@media (max-width: 900px) {
+  .galeria-slide.galeria-slide--large {
+    flex: 0 0 100vw !important;
+  }
+
+  .galeria-slide.galeria-slide--large img {
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+}
