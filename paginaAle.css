@@ -934,9 +934,9 @@ img {
 
 /* Footer */
 .footer {
-  border-top: 1px solid rgba(15, 23, 42, 0.9);
-  background: #020617;
-  padding: 1.2rem 0 1.4rem;
+  border-top: 1px solid rgba(255, 0, 0, 0.9);
+  background: #ffffff;
+  padding: 2.2rem 0 2.6rem; /* aumentado para hacer la parte final más grande */
 }
 
 .footer-content {
@@ -944,7 +944,8 @@ img {
   justify-content: space-between;
   align-items: center;
   color: var(--text-muted);
-  font-size: 0.82rem;
+  font-size: 0.95rem; /* aumentar legibilidad */
+  gap: 1rem;
 }
 
 .footer .small {
@@ -1054,8 +1055,9 @@ img {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  padding: 2rem 0;
+  padding: 0; /* eliminar barras arriba/abajo */
   background: transparent;
+  overflow: hidden; /* evitar que se muestre fondo fuera del slider */
 }
 
 .section-galeria .container {
@@ -1067,6 +1069,29 @@ img {
 .section-galeria .galeria-slider {
   width: 100%;
 }
+
+/* Hacer que la galería actúe como un divisor fino entre hero y contenido */
+.section-galeria .galeria-viewport {
+  /* Mostrar la galería a su altura natural para que las imágenes se vean completas */
+  height: auto;
+  overflow: visible;
+}
+
+.section-galeria .galeria-track {
+  align-items: center; /* centrar verticalmente si las imágenes tienen altura diferente */
+}
+
+.section-galeria .galeria-slide img {
+  width: 100%;
+  height: auto; /* mostrar imagen completa sin recortar */
+  max-height: 380px; /* límite razonable para que no ocupe demasiado espacio */
+  object-fit: contain; /* asegura que la imagen se vea entera (puede dejar barras laterales) */
+  display: block;
+  border-radius: 0;
+}
+
+/* Quitar el gap visual entre la galería y las secciones adyacentes */
+/* restauramos la separación natural entre secciones (usar padding de .section) */
 
 @media (max-width: 768px) {
   .cards-grid {
@@ -1116,11 +1141,10 @@ img {
 
 /* Contenedor de los logos (dos filas centradas) */
 .brands-logos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 2rem;
   align-items: center;
-  gap: 2.5rem 4rem; /* vertical / horizontal */
 }
 
 /* Estilo de cada logo */
@@ -1130,7 +1154,14 @@ img {
   height: auto;
   filter: grayscale(30%);
   opacity: 0.9;
-  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.28s ease, filter 0.28s ease, opacity 0.28s ease;
+}
+
+/* Clase explícita para asegurar prioridad y limpieza por JS */
+.brand-logo {
+  filter: grayscale(30%);
+  opacity: 0.9;
+  transition: transform 0.28s ease, filter 0.28s ease, opacity 0.28s ease;
 }
 
 /* Hover similar al sitio de ejemplo */
@@ -1138,6 +1169,22 @@ img {
   transform: translateY(-4px);
   filter: grayscale(0%);
   opacity: 1;
+}
+
+/* Cuando el mouse está sobre cualquier logo, aplicar el efecto a TODOS */
+.brands-logos:hover img,
+.brands-logos:hover .brand-logo {
+  transform: translateY(-4px);
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Asegurar reversión si el contenedor no está en hover */
+.brands-logos:not(:hover) img,
+.brands-logos:not(:hover) .brand-logo {
+  transform: none;
+  filter: grayscale(30%);
+  opacity: 0.9;
 }
 
 /* Responsivo */
@@ -1242,6 +1289,33 @@ img {
 .card-roja .card-btn {
   margin-top: 0.75rem;
   align-self: center;
+}
+
+/* Botones: rojo card -> botón blanco; blanca card -> botón rojo */
+.card-roja .card-btn {
+  background: #ffffff;
+  color: var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.card-roja:hover .card-btn,
+.card-roja .card-btn:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.card-blanca .card-btn {
+  background: var(--accent);
+  color: #ffffff;
+  border: 1px solid var(--accent);
+}
+
+.card-blanca:hover .card-btn,
+.card-blanca .card-btn:hover {
+  background: #ffffff;
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 

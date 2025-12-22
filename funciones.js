@@ -323,14 +323,77 @@ window.addEventListener("scroll", () => {
 
 
 
+// ==========================
+// Marcas / Logos: hover cambia todas las imágenes a su versión a color
+// ==========================
+// Usaremos sólo CSS para el efecto de hover en logos (ver `paginaAle.css`).
+// Limpieza: eliminar estilos inline en logos que puedan impedir la reversión
+document.addEventListener('DOMContentLoaded', () => {
+  const logos = document.querySelectorAll('.brands-logos img');
+  logos.forEach((img) => {
+    img.classList.add('brand-logo');
+    // eliminar estilos en línea si existen (provienen de pruebas previas)
+    if (img.hasAttribute('style')) img.removeAttribute('style');
+  });
+});
+
+// Autoplay específico para el banner grande (sección .section-galeria)
+document.addEventListener('DOMContentLoaded', () => {
+  const bannerViewport = document.querySelector('.section-galeria .galeria-viewport');
+  if (!bannerViewport) return;
+
+  const slides = bannerViewport.querySelectorAll('.galeria-slide');
+  if (!slides || slides.length === 0) return;
+
+  const GAP = 19; // coincidimos con el gap usado en CSS/JS
+  let current = 0;
+  let step = 0;
+  let autoId = null;
+
+  function updateStep() {
+    const first = slides[0];
+    if (!first) return;
+    step = Math.round(first.getBoundingClientRect().width + GAP);
+  }
+
+  function goTo(i, smooth = true) {
+    current = i % slides.length;
+    if (current < 0) current = slides.length - 1;
+    bannerViewport.scrollTo({ left: current * step, behavior: smooth ? 'smooth' : 'auto' });
+  }
+
+  function next() { goTo(current + 1, true); }
+
+  function startAuto() {
+    stopAuto();
+    autoId = setInterval(next, 3800);
+  }
+
+  function stopAuto() {
+    if (autoId) { clearInterval(autoId); autoId = null; }
+  }
+
+  // Inicializar medidas y autoplay
+  updateStep();
+  // llevar al inicio (por si quedó desplazado)
+  goTo(0, false);
+  startAuto();
+
+  // Pausar en hover/drag
+  bannerViewport.addEventListener('mouseenter', stopAuto);
+  bannerViewport.addEventListener('mouseleave', startAuto);
+
+  // Recalcular en resize
+  window.addEventListener('resize', () => {
+    updateStep();
+    goTo(current, false);
+  });
 });
 
 /* ==========================
    Slider Rotulación Vehicular (autoplay + drag)
    usa .vehicular-item (SU HTML REAL)
 ========================== */
-const vViewport = document.querySelector("#galeria-vehicular .vehicular-viewport");
-const vTrack    = document.querySelector("#galeria-vehicular .vehicular-track");
 const vItems    = document.querySelectorAll("#galeria-vehicular .vehicular-item");
 
 if (vViewport && vTrack && vItems.length > 1) {
@@ -409,4 +472,4 @@ if (vViewport && vTrack && vItems.length > 1) {
   startAuto();
 }
 
-
+});
