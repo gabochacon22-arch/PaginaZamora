@@ -883,6 +883,246 @@ img {
 }
 
 /* Contacto */
+/* NUEVA SECCIÓN DE CONTACTO - DISEÑO BLANCO */
+
+.section-contacto {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 4rem 0;
+}
+
+.section-contacto .container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.contacto-title {
+  text-align: center;
+  color: #020617;
+  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+}
+
+.contacto-subtitle {
+  text-align: center;
+  color: #555;
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+}
+
+/* Google Form Container (compact) */
+.google-form-container {
+  background: rgb(255, 255, 255);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f50000;
+  overflow: hidden;
+  max-width: 120px; /* compacto similar a la referencia */
+  margin: 0 auto;
+}
+
+.google-form-container iframe {
+  border-radius: 2px;
+  width: 100%;
+  height: 580px; /* altura compacta, permite scroll interno en el form */
+  border: none;
+  display: block;
+}
+
+/* Two-column layout for contact section */
+.section-contacto .contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 520px; /* texto flexible + formulario fijo */
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.section-contacto .contact-info {
+  padding: 0.5rem 1rem;
+}
+
+.google-form-container {
+  max-width: 100%;
+  margin: 0; /* align right column to grid */
+  padding: 0.8rem;
+}
+
+@media (max-width: 900px) {
+  .section-contacto .contact-grid {
+    grid-template-columns: 1fr; /* stack on mobile */
+  }
+  .google-form-container iframe {
+    height: 1100px;
+  }
+}
+
+@media (max-width: 600px) {
+  .google-form-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 0.6rem;
+  }
+  .google-form-container iframe {
+    height: 1200px;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-row .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.form-group:last-child {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #020617;
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.9rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  color: #333;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #e74c3c;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+.phone-input {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.country-select {
+  flex: 0 0 80px;
+  padding: 0.9rem 0.8rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  color: #333;
+  background: #fafafa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.country-select:focus {
+  border-color: #e74c3c;
+  background: white;
+  outline: none;
+}
+
+.phone-input input {
+  flex: 1;
+}
+
+.form-error {
+  display: none;
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+.form-group.error input,
+.form-group.error textarea {
+  border-color: #e74c3c;
+  background: rgba(231, 76, 60, 0.05);
+}
+
+.form-group.error .form-error {
+  display: block;
+}
+
+.btn-enviar {
+  width: 100%;
+  padding: 1rem;
+  background: #e74c3c;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-enviar:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+}
+
+.btn-enviar:active {
+  transform: translateY(0);
+}
+
+.btn-enviar.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-success {
+  display: none;
+  padding: 1rem;
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.form-success.show {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos antiguos mantenidos para compatibilidad */
 .contact-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
@@ -896,11 +1136,11 @@ img {
   margin: 1rem 0 0;
   color: var(--text-muted);
   font-size: 0.95rem;
+  display: none;
 }
 
 .contact-list li + li {
-  margin-top:
-    0.35rem;
+  margin-top: 0.35rem;
 }
 
 .contact-form {
@@ -909,6 +1149,7 @@ img {
   padding: 1.8rem 1.7rem;
   border: 1px solid var(--border-soft);
   box-shadow: 0 22px 60px rgba(15, 23, 42, 0.95);
+  display: none;
 }
 
 .contact-form input,
@@ -934,9 +1175,9 @@ img {
 
 /* Footer */
 .footer {
-  border-top: 1px solid rgba(255, 0, 0, 0.9);
-  background: #ffffff;
-  padding: 2.2rem 0 2.6rem; /* aumentado para hacer la parte final más grande */
+  border-top: 1px solid rgba(15, 23, 42, 0.9);
+  background: #020617;
+  padding: 6rem 0 6rem;
 }
 
 .footer-content {
@@ -944,8 +1185,7 @@ img {
   justify-content: space-between;
   align-items: center;
   color: var(--text-muted);
-  font-size: 0.95rem; /* aumentar legibilidad */
-  gap: 1rem;
+  font-size: 0.82rem;
 }
 
 .footer .small {
@@ -1038,6 +1278,18 @@ img {
     order: -1;
   }
 
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-modern {
+    padding: 2rem;
+  }
+
+  .contacto-title {
+    font-size: 2rem;
+  }
+
   .header-content {
     gap: 1rem;
   }
@@ -1060,16 +1312,54 @@ img {
   overflow: hidden; /* evitar que se muestre fondo fuera del slider */
 }
 
+/* Pseudo-elemento que mostrará la imagen del slider en blurred como fondo */
+.section-galeria::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1; /* detrás del contenido del slider */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: var(--banner-image, none);
+  filter: blur(8px) saturate(0.95);
+  transform: scale(1.03); /* evitar bordes visibles al difuminar */
+  transition: background-image 0.6s ease, opacity 0.6s ease;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* Capa overlay para atenuar y mantener legibilidad */
+.section-galeria::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(rgba(255,255,255,0.02), rgba(0,0,0,0.08));
+  pointer-events: none;
+}
+
+/* Asegurar que el contenido del slider quede por encima */
+.section-galeria .galeria-viewport,
+.section-galeria .galeria-track,
+.section-galeria .galeria-slide {
+  position: relative;
+  z-index: 3;
+}
+
 .section-galeria .container {
   max-width: 100%;
   width: 100%;
   padding: 0;
+  position: relative;
+  z-index: 3; /* 👈 AGREGAR ESTO */
 }
 
 .section-galeria .galeria-slider {
   width: 100%;
+  position: relative;
+  z-index: 3; /* 👈 AGREGAR ESTO */
 }
-
 /* Hacer que la galería actúe como un divisor fino entre hero y contenido */
 .section-galeria .galeria-viewport {
   /* Mostrar la galería a su altura natural para que las imágenes se vean completas */
@@ -1158,10 +1448,13 @@ img {
 }
 
 /* Clase explícita para asegurar prioridad y limpieza por JS */
+
 .brand-logo {
-  filter: grayscale(30%);
-  opacity: 0.9;
-  transition: transform 0.28s ease, filter 0.28s ease, opacity 0.28s ease;
+  width: 100%;
+  max-height: 70px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 /* Hover similar al sitio de ejemplo */
@@ -1206,6 +1499,42 @@ img {
 @media (max-width: 600px) {
   .brands-logos img {
     max-width: 100px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-modern {
+    padding: 1.5rem;
+  }
+
+  .contacto-title {
+    font-size: 1.5rem;
+  }
+
+  .contacto-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .country-select {
+    font-size: 0.9rem;
+    padding: 0.8rem 0.9rem;
+  }
+
+  .btn-enviar {
+    padding: 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .section-contacto {
+    padding: 2rem 0;
   }
 }
 

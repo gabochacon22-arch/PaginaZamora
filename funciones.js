@@ -1,5 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   /* ==========================
+     0. GOOGLE FORM EMBEBIDO
+     (No requiere validación adicional)
+  =========================== */
+  
+  console.log("✅ Google Form embebido listo");
+
+  /* ==========================
      1. CAMBIO ENTRE CARDS Y GALERÍAS DE SERVICIOS
   =========================== */
 
@@ -9,8 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const botonesVolver = document.querySelectorAll(".btn-volver");
   const headerServicios = document.querySelector("#servicios .section-header");
 
-
-  // Oculta todas las galerías
   function ocultarTodasLasGalerias() {
     galerias.forEach((g) => {
       g.classList.remove("activa");
@@ -18,14 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Muestra una galería específica
   function mostrarGaleria(idGaleria) {
-  cardsServicios.classList.add("oculta");
-  if (headerServicios) headerServicios.classList.add("oculta");   // 👈 NUEVO
+    cardsServicios.classList.add("oculta");
+    if (headerServicios) headerServicios.classList.add("oculta");
 
-  setTimeout(() => {
-    cardsServicios.classList.add("escondida");
-    if (headerServicios) headerServicios.classList.add("escondida"); // 👈 NUEVO
+    setTimeout(() => {
+      cardsServicios.classList.add("escondida");
+      if (headerServicios) headerServicios.classList.add("escondida");
 
       ocultarTodasLasGalerias();
       const galeria = document.getElementById(`galeria-${idGaleria}`);
@@ -35,441 +39,345 @@ document.addEventListener("DOMContentLoaded", () => {
       void galeria.offsetWidth;
       galeria.classList.add("activa");
 
-      // ⭐ Llevar al usuario al inicio de la galería
-      const yOffset = -120; // Ajusta si el header es más alto
+      const yOffset = -120;
       const y = galeria.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
       window.scrollTo({
         top: y,
         behavior: "smooth"
       });
-
-    }, 350); // misma duración que la animación
+    }, 350);
   }
 
-
-  // Volver a los cards
   function volverACards() {
     const galeriaActiva = document.querySelector(".galeria-servicio.activa");
 
     if (galeriaActiva) {
-      // Animar salida de la galería
       galeriaActiva.classList.remove("activa");
 
       setTimeout(() => {
         galeriaActiva.style.display = "none";
-
-        // Mostrar de nuevo los cards
         cardsServicios.classList.remove("escondida");
-        if (headerServicios) headerServicios.classList.remove("escondida"); // 👈 NUEVO
+        if (headerServicios) headerServicios.classList.remove("escondida");
         
         requestAnimationFrame(() => {
           cardsServicios.classList.remove("oculta");
-          if (headerServicios) headerServicios.classList.remove("oculta"); // 👈 NUEVO
-
-          
+          if (headerServicios) headerServicios.classList.remove("oculta");
         });
       }, 350);
     } else {
-      // Por si acaso
       cardsServicios.classList.remove("escondida", "oculta");
     }
   }
 
-  // Click en “Más detalles / Ver ejemplos / Cómo funciona”
   botonesVerGaleria.forEach((boton) => {
     boton.addEventListener("click", () => {
-      const galeriaId = boton.dataset.galeria; // luminosos, vallas, interna, etc.
+      const galeriaId = boton.dataset.galeria;
       mostrarGaleria(galeriaId);
     });
   });
 
-  // Click en “← Volver a servicios”
   botonesVolver.forEach((boton) => {
     boton.addEventListener("click", volverACards);
   });
 
   /* ==========================
-     2. SLIDER DE GALERÍA (tipo Albamedia: autoplay + drag con scroll)
+     2. SLIDER BANNER PRINCIPAL - VERSIÓN SIMPLE Y FUNCIONAL
   =========================== */
 
+  const viewport = document.querySelector(".galeria-viewport");
   const track = document.querySelector(".galeria-track");
   const slides = document.querySelectorAll(".galeria-slide");
-  const viewport = document.querySelector(".galeria-viewport");
 
-  // Solo inicializar si realmente existe el slider
-  if (track && slides.length > 0 && viewport) {
-    let currentIndex = 0;
-    let slideWidth = 0;
-    let maxIndex = 0;
-
-    // Para drag
+  if (viewport && track && slides.length > 0) {
+    console.log("Slider inicializado con", slides.length, "slides");
+    
     let isDragging = false;
     let startPos = 0;
-    let startScrollLeft = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID = 0;
+    let currentIndex = 0;
+    let autoplayTimer = null;
+
+    // Obtener posición del evento (mouse o touch)
+    function getPositionX(event) {
+      return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    }
+
+    // Calcular ancho de slide
+    function getSlideWidth() {
+      return slides[0].getBoundingClientRect().width;
+    }
+
+    // Mover a un índice específico
+    function moveToSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      
+      currentIndex = index;
+      const slideWidth = getSlideWidth();
+      currentTranslate = -slideWidth * currentIndex;
+      prevTranslate = currentTranslate;
+      setSliderPosition();
+    }
+
+    // Aplicar transformación
+    function setSliderPosition() {
+      track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    // Animación durante el drag
+    function animation() {
+      setSliderPosition();
+      if (isDragging) requestAnimationFrame(animation);
+    }
 
     // Autoplay
-    const AUTO_TIME = 4500; // ms
-    let autoPlayId = null;
-
-    function actualizarMedidas() {
-      // Calcular el ancho real del primer slide
-      const firstSlide = slides[0];
-      if (firstSlide) {
-        slideWidth = firstSlide.getBoundingClientRect().width;
-        // Incluir el gap (1.2rem = ~19px a tamaño base)
-        const gap = 19;
-        slideWidth += gap;
-      }
-      maxIndex = Math.max(slides.length - 1, 0);
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(() => {
+        moveToSlide(currentIndex + 1);
+      }, 4000);
     }
 
-    function siguienteSlide() {
-      currentIndex++;
-      if (currentIndex > maxIndex) currentIndex = 0;
-
-      const targetScroll = currentIndex * slideWidth;
-      viewport.scrollTo({
-        left: targetScroll,
-        behavior: "smooth"
-      });
-    }
-
-    function iniciarAutoplay() {
-      detenerAutoplay();
-      autoPlayId = setInterval(siguienteSlide, AUTO_TIME);
-    }
-
-    function detenerAutoplay() {
-      if (autoPlayId) {
-        clearInterval(autoPlayId);
-        autoPlayId = null;
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
       }
     }
 
-    // ---- Drag / swipe ----
-
-    function getPosX(event) {
-      return event.type.includes("mouse")
-        ? event.pageX
-        : event.touches[0].clientX;
+    // EVENTOS TOUCH/MOUSE START
+    function touchStart(index) {
+      return function(event) {
+        currentIndex = index;
+        startPos = getPositionX(event);
+        isDragging = true;
+        animationID = requestAnimationFrame(animation);
+        viewport.style.cursor = 'grabbing';
+        track.style.transition = 'none';
+        stopAutoplay();
+      }
     }
 
-    function touchStart(event) {
-      isDragging = true;
-      startPos = getPosX(event);
-      startScrollLeft = viewport.scrollLeft;
-      detenerAutoplay();
-    }
-
+    // TOUCH/MOUSE MOVE
     function touchMove(event) {
-      if (!isDragging) return;
-      const currentPos = getPosX(event);
-      const diff = currentPos - startPos;
-      viewport.scrollLeft = startScrollLeft - diff;
+      if (isDragging) {
+        const currentPosition = getPositionX(event);
+        currentTranslate = prevTranslate + currentPosition - startPos;
+      }
     }
 
+    // TOUCH/MOUSE END
     function touchEnd() {
-      if (!isDragging) return;
       isDragging = false;
+      cancelAnimationFrame(animationID);
+      viewport.style.cursor = 'grab';
+      track.style.transition = 'transform 0.4s ease-out';
 
-      // Snap al slide más cercano
-      const movedBy = Math.abs(viewport.scrollLeft - startScrollLeft);
-      const threshold = slideWidth * 0.3;
+      const movedBy = currentTranslate - prevTranslate;
+      const slideWidth = getSlideWidth();
 
-      if (movedBy > threshold) {
-        if (viewport.scrollLeft > startScrollLeft) {
-          // Arrastraron a la derecha (retroceso)
-          currentIndex--;
-        } else {
-          // Arrastraron a la izquierda (avance)
-          currentIndex++;
-        }
+      // Si movió más del 25% del ancho, cambiar de slide
+      if (movedBy < -slideWidth / 4 && currentIndex < slides.length - 1) {
+        currentIndex += 1;
+      }
+      if (movedBy > slideWidth / 4 && currentIndex > 0) {
+        currentIndex -= 1;
       }
 
-      if (currentIndex < 0) currentIndex = maxIndex;
-      if (currentIndex > maxIndex) currentIndex = 0;
-
-      const targetScroll = currentIndex * slideWidth;
-      viewport.scrollTo({
-        left: targetScroll,
-        behavior: "smooth"
-      });
-
-      iniciarAutoplay();
+      moveToSlide(currentIndex);
+      
+      // Reiniciar autoplay después de 2 segundos
+      setTimeout(() => {
+        startAutoplay();
+      }, 2000);
     }
 
-    // Eventos de mouse
-    viewport.addEventListener("mousedown", touchStart);
-    window.addEventListener("mousemove", touchMove);
-    window.addEventListener("mouseup", touchEnd);
+    // Configurar eventos para cada slide
+    slides.forEach((slide, index) => {
+      const slideImage = slide.querySelector('img');
+      if (slideImage) {
+        slideImage.addEventListener('dragstart', (e) => e.preventDefault());
+      }
 
-    // Eventos táctiles
-    viewport.addEventListener("touchstart", touchStart, { passive: true });
-    viewport.addEventListener("touchmove", touchMove, { passive: true });
-    viewport.addEventListener("touchend", touchEnd);
+      // Touch events
+      slide.addEventListener('touchstart', touchStart(index), { passive: true });
+      slide.addEventListener('touchend', touchEnd);
+      slide.addEventListener('touchmove', touchMove, { passive: true });
 
-    // Evitar que se seleccione texto/imágenes durante el drag con mouse
-    viewport.addEventListener("dragstart", (e) => e.preventDefault());
+      // Mouse events
+      slide.addEventListener('mousedown', touchStart(index));
+      slide.addEventListener('mouseup', touchEnd);
+      slide.addEventListener('mouseleave', () => {
+        if (isDragging) touchEnd();
+      });
+      slide.addEventListener('mousemove', touchMove);
+    });
 
-    // Recalcular en resize
-    window.addEventListener("resize", actualizarMedidas);
-
-    // Inicializar
-    actualizarMedidas();
-    iniciarAutoplay();
+    // Configuración inicial
+    viewport.style.cursor = 'grab';
+    track.style.transition = 'transform 0.4s ease-out';
+    
+    // Iniciar autoplay
+    console.log("Iniciando autoplay...");
+    startAutoplay();
+  } else {
+    console.log("No se encontró el slider");
   }
 
   /* ==========================
-     3. Slider vertical Rotulación Vehicular (auto scroll suave)
+     3. SLIDER ROTULACIÓN VEHICULAR
   =========================== */
 
-  const vehViewport = document.querySelector(
-    "#galeria-vehicular .galeria-viewport"
-  );
-  const vehSlides = document.querySelectorAll(
-    "#galeria-vehicular .vehicular-track .galeria-slide"
-  );
+  const vViewport = document.querySelector("#galeria-vehicular .vehicular-viewport");
+  const vTrack = document.querySelector("#galeria-vehicular .vehicular-track");
+  const vItems = document.querySelectorAll("#galeria-vehicular .vehicular-item");
 
-  if (vehViewport && vehSlides.length > 1) {
-    let vehIndex = 0;
+  if (vViewport && vTrack && vItems.length > 0) {
+    let vIsDragging = false;
+    let vStartX = 0;
+    let vScrollLeft = 0;
+    let vAutoTimer = null;
 
-    function scrollVehicular() {
-      const slide = vehSlides[0];
-      if (!slide) return;
+    vViewport.style.cursor = "grab";
 
-      const slideHeight = slide.offsetHeight + parseFloat(
-        getComputedStyle(slide).marginBottom || "0"
-      );
-
-      vehIndex = (vehIndex + 1) % vehSlides.length;
-      const top = slideHeight * vehIndex;
-
-      vehViewport.scrollTo({
-        top,
-        behavior: "smooth",
-      });
+    function vStartAutoplay() {
+      if (vAutoTimer) clearInterval(vAutoTimer);
+      
+      vAutoTimer = setInterval(() => {
+        const itemWidth = vItems[0].offsetWidth;
+        const gap = parseFloat(getComputedStyle(vTrack).gap || "20") || 20;
+        const maxScroll = vViewport.scrollWidth - vViewport.offsetWidth;
+        
+        if (vViewport.scrollLeft >= maxScroll - 5) {
+          vViewport.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          vViewport.scrollBy({ left: itemWidth + gap, behavior: 'smooth' });
+        }
+      }, 3500);
     }
 
-    // Auto scroll cada 4 segundos
-    setInterval(scrollVehicular, 4000);
-  }
+    function vStopAutoplay() {
+      if (vAutoTimer) {
+        clearInterval(vAutoTimer);
+        vAutoTimer = null;
+      }
+    }
 
-/* ==========================
-   Slider Rotulación Vehicular (horizontal, 2 imágenes a la par)
-========================== */
-
-const vViewport = document.querySelector("#galeria-vehicular .vehicular-viewport");
-const vTrack    = document.querySelector("#galeria-vehicular .vehicular-track");
-const vSlides   = document.querySelectorAll("#galeria-vehicular .vehicular-slide");
-
-if (vViewport && vTrack && vSlides.length > 1) {
-  let vIndex = 0;
-  const AUTO_TIME = 3800;
-  let autoId = null;
-
-  function goTo(index, withTransition = true) {
-    vIndex = index;
-    if (vIndex < 0) vIndex = vSlides.length - 1;
-    if (vIndex >= vSlides.length) vIndex = 0;
-
-    vTrack.style.transition = withTransition ? "transform .55s ease" : "none";
-    vTrack.style.transform = `translateX(-${vIndex * vViewport.clientWidth}px)`;
-  }
-
-  function next() {
-    goTo(vIndex + 1, true);
-  }
-
-  function startAuto() {
-    stopAuto();
-    autoId = setInterval(next, AUTO_TIME);
-  }
-
-  function stopAuto() {
-    if (autoId) clearInterval(autoId);
-    autoId = null;
-  }
-
-  // Recalcular en resize para que no se “corra”
-  window.addEventListener("resize", () => goTo(vIndex, false));
-
-  // (Opcional) pausar cuando el mouse entra
-  vViewport.addEventListener("mouseenter", stopAuto);
-  vViewport.addEventListener("mouseleave", startAuto);
-
-  // Inicializar
-  goTo(0, false);
-  startAuto();
-}
-
-const header = document.querySelector(".header");
-let lastY = window.scrollY;
-
-window.addEventListener("scroll", () => {
-  const y = window.scrollY;
-
-  if (y > 80 && y > lastY) {
-    // bajando
-    header.classList.add("header-hide");
-  } else {
-    // subiendo o arriba
-    header.classList.remove("header-hide");
-  }
-
-  lastY = y;
-}, { passive: true });
-
-
-
-
-// ==========================
-// Marcas / Logos: hover cambia todas las imágenes a su versión a color
-// ==========================
-// Usaremos sólo CSS para el efecto de hover en logos (ver `paginaAle.css`).
-// Limpieza: eliminar estilos inline en logos que puedan impedir la reversión
-document.addEventListener('DOMContentLoaded', () => {
-  const logos = document.querySelectorAll('.brands-logos img');
-  logos.forEach((img) => {
-    img.classList.add('brand-logo');
-    // eliminar estilos en línea si existen (provienen de pruebas previas)
-    if (img.hasAttribute('style')) img.removeAttribute('style');
-  });
-});
-
-// Autoplay específico para el banner grande (sección .section-galeria)
-document.addEventListener('DOMContentLoaded', () => {
-  const bannerViewport = document.querySelector('.section-galeria .galeria-viewport');
-  if (!bannerViewport) return;
-
-  const slides = bannerViewport.querySelectorAll('.galeria-slide');
-  if (!slides || slides.length === 0) return;
-
-  const GAP = 19; // coincidimos con el gap usado en CSS/JS
-  let current = 0;
-  let step = 0;
-  let autoId = null;
-
-  function updateStep() {
-    const first = slides[0];
-    if (!first) return;
-    step = Math.round(first.getBoundingClientRect().width + GAP);
-  }
-
-  function goTo(i, smooth = true) {
-    current = i % slides.length;
-    if (current < 0) current = slides.length - 1;
-    bannerViewport.scrollTo({ left: current * step, behavior: smooth ? 'smooth' : 'auto' });
-  }
-
-  function next() { goTo(current + 1, true); }
-
-  function startAuto() {
-    stopAuto();
-    autoId = setInterval(next, 3800);
-  }
-
-  function stopAuto() {
-    if (autoId) { clearInterval(autoId); autoId = null; }
-  }
-
-  // Inicializar medidas y autoplay
-  updateStep();
-  // llevar al inicio (por si quedó desplazado)
-  goTo(0, false);
-  startAuto();
-
-  // Pausar en hover/drag
-  bannerViewport.addEventListener('mouseenter', stopAuto);
-  bannerViewport.addEventListener('mouseleave', startAuto);
-
-  // Recalcular en resize
-  window.addEventListener('resize', () => {
-    updateStep();
-    goTo(current, false);
-  });
-});
-
-/* ==========================
-   Slider Rotulación Vehicular (autoplay + drag)
-   usa .vehicular-item (SU HTML REAL)
-========================== */
-const vItems    = document.querySelectorAll("#galeria-vehicular .vehicular-item");
-
-if (vViewport && vTrack && vItems.length > 1) {
-  let index = 0;
-  const AUTO_TIME = 3500;
-  let autoId = null;
-
-  const getStep = () => {
-    // ancho de 1 "card" + gap
-    const item = vItems[0];
-    const styles = getComputedStyle(vTrack);
-    const gap = parseFloat(styles.columnGap || styles.gap || "0");
-    return item.getBoundingClientRect().width + gap;
-  };
-
-  const goTo = (i) => {
-    index = i;
-    const maxIndex = vItems.length - 1;
-    if (index < 0) index = maxIndex;
-    if (index > maxIndex) index = 0;
-
-    vViewport.scrollTo({
-      left: index * getStep(),
-      behavior: "smooth"
+    // Mouse
+    vViewport.addEventListener("mousedown", (e) => {
+      vIsDragging = true;
+      vViewport.style.cursor = "grabbing";
+      vStartX = e.pageX;
+      vScrollLeft = vViewport.scrollLeft;
+      vStopAutoplay();
     });
-  };
 
-  const next = () => goTo(index + 1);
+    window.addEventListener("mouseup", () => {
+      if (vIsDragging) {
+        vIsDragging = false;
+        vViewport.style.cursor = "grab";
+        setTimeout(vStartAutoplay, 2000);
+      }
+    });
 
-  const startAuto = () => {
-    stopAuto();
-    autoId = setInterval(next, AUTO_TIME);
-  };
+    window.addEventListener("mousemove", (e) => {
+      if (!vIsDragging) return;
+      e.preventDefault();
+      const x = e.pageX;
+      const walk = (vStartX - x);
+      vViewport.scrollLeft = vScrollLeft + walk;
+    });
 
-  const stopAuto = () => {
-    if (autoId) clearInterval(autoId);
-    autoId = null;
-  };
+    // Touch
+    vViewport.addEventListener("touchstart", () => vStopAutoplay(), { passive: true });
+    vViewport.addEventListener("touchend", () => setTimeout(vStartAutoplay, 2000), { passive: true });
 
-  // Drag
-  let isDown = false;
-  let startX = 0;
-  let startScrollLeft = 0;
+    vStartAutoplay();
+  }
 
-  vViewport.addEventListener("mousedown", (e) => {
-    isDown = true;
-    startX = e.pageX;
-    startScrollLeft = vViewport.scrollLeft;
-    stopAuto();
+  /* ==========================
+     4. HEADER HIDE/SHOW
+  =========================== */
+
+  const header = document.querySelector(".header");
+  let lastY = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    if (y > 80 && y > lastY) {
+      header.classList.add("header-hide");
+    } else {
+      header.classList.remove("header-hide");
+    }
+    lastY = y;
+  }, { passive: true });
+
+  /* ==========================
+     5. LOGOS HOVER
+  =========================== */
+
+  document.querySelectorAll('.brand-logo').forEach(logo => {
+    const normal = logo.dataset.normal;
+    const rojo = logo.dataset.rojo;
+
+    if (normal && rojo) {
+      logo.addEventListener('mouseenter', () => {
+        logo.src = normal;
+      });
+      logo.addEventListener('mouseleave', () => {
+        logo.src = rojo;
+      });
+    }
   });
 
-  window.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    const walk = (e.pageX - startX);
-    vViewport.scrollLeft = startScrollLeft - walk;
+  /* ==========================
+     6. FONDO DINÁMICO BANNER
+  =========================== */
+
+  (function () {
+  const section = document.querySelector('.section-galeria');
+  if (!section) return;
+
+  const imgs = Array.from(section.querySelectorAll('.galeria-slide img'));
+  if (!imgs.length) return;
+
+  let i = 0;
+  let bgTimer = null;
+
+  function setBg(idx) {
+    const src = imgs[idx]?.getAttribute('src');
+    if (!src) return;
+
+    // Se pasa la imagen a CSS
+    section.style.setProperty('--banner-image', `url("${src}")`);
+  }
+
+  setBg(0);
+
+  bgTimer = setInterval(() => {
+    i = (i + 1) % imgs.length;
+    setBg(i);
+  }, 4000);
+
+  section.addEventListener('mouseenter', () => {
+    if (bgTimer) {
+      clearInterval(bgTimer);
+      bgTimer = null;
+    }
   });
 
-  window.addEventListener("mouseup", () => {
-    if (!isDown) return;
-    isDown = false;
-
-    // “snap” al item más cercano
-    const step = getStep();
-    index = Math.round(vViewport.scrollLeft / step);
-    goTo(index);
-    startAuto();
+  section.addEventListener('mouseleave', () => {
+    if (!bgTimer) {
+      bgTimer = setInterval(() => {
+        i = (i + 1) % imgs.length;
+        setBg(i);
+      }, 4000);
+    }
   });
+})();
 
-  // Touch
-  vViewport.addEventListener("touchstart", () => stopAuto(), { passive: true });
-  vViewport.addEventListener("touchend", () => startAuto(), { passive: true });
-
-  // Resize
-  window.addEventListener("resize", () => goTo(index));
-
-  startAuto();
-}
 
 });
