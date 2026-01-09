@@ -315,28 +315,144 @@ document.addEventListener("DOMContentLoaded", () => {
     lastY = y;
   }, { passive: true });
 
-  /* ==========================
-     5. LOGOS HOVER
-  =========================== */
+/* ==========================
+   5. CARRUSEL DE LOGOS - ARRASTRE TIPO SLIDER
+=========================== */
 
-  document.querySelectorAll('.brand-logo').forEach(logo => {
-    const normal = logo.dataset.normal;
-    const rojo = logo.dataset.rojo;
+const brandsWrapper = document.querySelector('.brands-carousel-wrapper');
+const brandsTrack = document.querySelector('.brands-carousel-track');
 
-    if (normal && rojo) {
-      logo.addEventListener('mouseenter', () => {
-        logo.src = normal;
-      });
-      logo.addEventListener('mouseleave', () => {
-        logo.src = rojo;
-      });
+if (brandsWrapper && brandsTrack) {
+  let isDragging = false;
+  let startX = 0;
+  let scrollLeft = 0;
+  let animationID = 0;
+
+  // Prevenir comportamiento por defecto en imágenes
+  brandsTrack.querySelectorAll('img').forEach(img => {
+    img.addEventListener('dragstart', (e) => e.preventDefault());
+  });
+
+  // Mouse down - iniciar arrastre
+  brandsWrapper.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - brandsWrapper.offsetLeft;
+    scrollLeft = brandsWrapper.scrollLeft;
+    brandsWrapper.style.cursor = 'grabbing';
+    brandsTrack.style.animationPlayState = 'paused';
+  });
+
+  // Mouse up - finalizar arrastre
+  const handleMouseUp = () => {
+    if (isDragging) {
+      isDragging = false;
+      brandsWrapper.style.cursor = 'grab';
+      
+      // Reanudar animación después de 2 segundos
+      setTimeout(() => {
+        brandsTrack.style.animationPlayState = 'running';
+      }, 2000);
+    }
+  };
+
+  brandsWrapper.addEventListener('mouseup', handleMouseUp);
+  document.addEventListener('mouseup', handleMouseUp);
+
+  // Mouse leave - finalizar arrastre si sale del área
+  brandsWrapper.addEventListener('mouseleave', () => {
+    if (isDragging) {
+      isDragging = false;
+      brandsWrapper.style.cursor = 'grab';
     }
   });
+
+  // Mouse move - realizar el arrastre (igual que el slider principal)
+  brandsWrapper.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    
+    const x = e.pageX - brandsWrapper.offsetLeft;
+    const walk = x - startX;
+    brandsWrapper.scrollLeft = scrollLeft - walk;
+  });
+
+  // Touch events para móviles
+  brandsWrapper.addEventListener('touchstart', () => {
+    brandsTrack.style.animationPlayState = 'paused';
+  }, { passive: true });
+
+  brandsWrapper.addEventListener('touchend', () => {
+    setTimeout(() => {
+      brandsTrack.style.animationPlayState = 'running';
+    }, 2000);
+  }, { passive: true });
+
+  console.log("✅ Carrusel con arrastre tipo slider activado");
+}
+
+// CAMBIO DE COLOR EN LOGOS (hover)
+document.querySelectorAll('.brand-logo-carousel').forEach(logo => {
+  const src = logo.getAttribute('src');
+  
+  if (src && src.includes('Rojo')) {
+    const normalSrc = src.replace('Rojo', '');
+    const rojoSrc = src;
+    
+    logo.addEventListener('mouseenter', () => {
+      logo.src = normalSrc;
+    });
+    
+    logo.addEventListener('mouseleave', () => {
+      logo.src = rojoSrc;
+    });
+  }
+});
+
+console.log("✅ Cambio de color en logos activado");
+
+// CAMBIO DE COLOR EN LOGOS (hover)
+document.querySelectorAll('.brand-logo-carousel').forEach(logo => {
+  const src = logo.getAttribute('src');
+  
+  if (src && src.includes('Rojo')) {
+    const normalSrc = src.replace('Rojo', '');
+    const rojoSrc = src;
+    
+    logo.addEventListener('mouseenter', () => {
+      logo.src = normalSrc;
+    });
+    
+    logo.addEventListener('mouseleave', () => {
+      logo.src = rojoSrc;
+    });
+  }
+});
+
+console.log("✅ Cambio de color en logos activado");
+
+// CAMBIO DE COLOR EN LOGOS (hover)
+document.querySelectorAll('.brand-logo-carousel').forEach(logo => {
+  const src = logo.getAttribute('src');
+  
+  if (src && src.includes('Rojo')) {
+    const normalSrc = src.replace('Rojo', '');
+    const rojoSrc = src;
+    
+    logo.addEventListener('mouseenter', () => {
+      logo.src = normalSrc;
+    });
+    
+    logo.addEventListener('mouseleave', () => {
+      logo.src = rojoSrc;
+    });
+  }
+});
+
+console.log("✅ Cambio de color en logos activado");
 
   /* ==========================
      6. FONDO DINÁMICO BANNER
   =========================== */
-
   (function () {
   const section = document.querySelector('.section-galeria');
   if (!section) return;
