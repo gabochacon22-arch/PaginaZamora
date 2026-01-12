@@ -1,15 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   /* ==========================
      0. GOOGLE FORM EMBEBIDO
-     (No requiere validación adicional)
-  =========================== */
-  
+  ========================== */
   console.log("✅ Google Form embebido listo");
 
   /* ==========================
      1. CAMBIO ENTRE CARDS Y GALERÍAS DE SERVICIOS
-  =========================== */
-
+  ========================== */
   const cardsServicios = document.getElementById("cardsServicios");
   const botonesVerGaleria = document.querySelectorAll(".ver-galeria");
   const galerias = document.querySelectorAll(".galeria-servicio");
@@ -24,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function mostrarGaleria(idGaleria) {
+    if (!cardsServicios) return;
+
     cardsServicios.classList.add("oculta");
     if (headerServicios) headerServicios.classList.add("oculta");
 
@@ -36,20 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!galeria) return;
 
       galeria.style.display = "block";
-      void galeria.offsetWidth;
+      void galeria.offsetWidth; // fuerza reflow para animación
       galeria.classList.add("activa");
 
       const yOffset = -120;
-      const y = galeria.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      const y =
+        galeria.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-      window.scrollTo({
-        top: y,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: y, behavior: "smooth" });
     }, 350);
   }
 
   function volverACards() {
+    if (!cardsServicios) return;
+
     const galeriaActiva = document.querySelector(".galeria-servicio.activa");
 
     if (galeriaActiva) {
@@ -59,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         galeriaActiva.style.display = "none";
         cardsServicios.classList.remove("escondida");
         if (headerServicios) headerServicios.classList.remove("escondida");
-        
+
         requestAnimationFrame(() => {
           cardsServicios.classList.remove("oculta");
           if (headerServicios) headerServicios.classList.remove("oculta");
@@ -67,13 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 350);
     } else {
       cardsServicios.classList.remove("escondida", "oculta");
+      if (headerServicios)
+        headerServicios.classList.remove("escondida", "oculta");
     }
   }
 
   botonesVerGaleria.forEach((boton) => {
     boton.addEventListener("click", () => {
       const galeriaId = boton.dataset.galeria;
-      mostrarGaleria(galeriaId);
+      if (galeriaId) mostrarGaleria(galeriaId);
     });
   });
 
@@ -82,16 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ==========================
-     2. SLIDER BANNER PRINCIPAL - VERSIÓN SIMPLE Y FUNCIONAL
-  =========================== */
-
+     2. SLIDER BANNER PRINCIPAL
+  ========================== */
   const viewport = document.querySelector(".galeria-viewport");
   const track = document.querySelector(".galeria-track");
   const slides = document.querySelectorAll(".galeria-slide");
 
   if (viewport && track && slides.length > 0) {
     console.log("Slider inicializado con", slides.length, "slides");
-    
+
     let isDragging = false;
     let startPos = 0;
     let currentTranslate = 0;
@@ -100,21 +100,35 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
     let autoplayTimer = null;
 
-    // Obtener posición del evento (mouse o touch)
+    // Bloquear drag de imágenes dentro del slider
+    slides.forEach((slide) => {
+      const img = slide.querySelector("img");
+      if (img) {
+        img.setAttribute("draggable", "false");
+        img.style.userSelect = "none";
+        img.style.webkitUserDrag = "none";
+        img.addEventListener("dragstart", (e) => e.preventDefault());
+      }
+    });
+
     function getPositionX(event) {
-      return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+      return event.type.includes("mouse")
+        ? event.pageX
+        : event.touches[0].clientX;
     }
 
-    // Calcular ancho de slide
     function getSlideWidth() {
       return slides[0].getBoundingClientRect().width;
     }
 
-    // Mover a un índice específico
+    function setSliderPosition() {
+      track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
     function moveToSlide(index) {
       if (index < 0) index = slides.length - 1;
       if (index >= slides.length) index = 0;
-      
+
       currentIndex = index;
       const slideWidth = getSlideWidth();
       currentTranslate = -slideWidth * currentIndex;
@@ -122,18 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
       setSliderPosition();
     }
 
-    // Aplicar transformación
-    function setSliderPosition() {
-      track.style.transform = `translateX(${currentTranslate}px)`;
-    }
-
-    // Animación durante el drag
     function animation() {
       setSliderPosition();
       if (isDragging) requestAnimationFrame(animation);
     }
 
-    // Autoplay
     function startAutoplay() {
       stopAutoplay();
       autoplayTimer = setInterval(() => {
@@ -148,79 +155,59 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // EVENTOS TOUCH/MOUSE START
     function touchStart(index) {
-      return function(event) {
+      return function (event) {
         currentIndex = index;
         startPos = getPositionX(event);
         isDragging = true;
         animationID = requestAnimationFrame(animation);
-        viewport.style.cursor = 'grabbing';
-        track.style.transition = 'none';
+        viewport.style.cursor = "grabbing";
+        track.style.transition = "none";
         stopAutoplay();
-      }
+      };
     }
 
-    // TOUCH/MOUSE MOVE
     function touchMove(event) {
-      if (isDragging) {
-        const currentPosition = getPositionX(event);
-        currentTranslate = prevTranslate + currentPosition - startPos;
-      }
+      if (!isDragging) return;
+      const currentPosition = getPositionX(event);
+      currentTranslate = prevTranslate + currentPosition - startPos;
     }
 
-    // TOUCH/MOUSE END
     function touchEnd() {
+      if (!isDragging) return;
+
       isDragging = false;
       cancelAnimationFrame(animationID);
-      viewport.style.cursor = 'grab';
-      track.style.transition = 'transform 0.4s ease-out';
+      viewport.style.cursor = "grab";
+      track.style.transition = "transform 0.4s ease-out";
 
       const movedBy = currentTranslate - prevTranslate;
       const slideWidth = getSlideWidth();
 
-      // Si movió más del 25% del ancho, cambiar de slide
-      if (movedBy < -slideWidth / 4 && currentIndex < slides.length - 1) {
-        currentIndex += 1;
-      }
-      if (movedBy > slideWidth / 4 && currentIndex > 0) {
-        currentIndex -= 1;
-      }
+      if (movedBy < -slideWidth / 4) currentIndex += 1;
+      if (movedBy > slideWidth / 4) currentIndex -= 1;
 
       moveToSlide(currentIndex);
-      
-      // Reiniciar autoplay después de 2 segundos
-      setTimeout(() => {
-        startAutoplay();
-      }, 2000);
+
+      setTimeout(startAutoplay, 2000);
     }
 
-    // Configurar eventos para cada slide
     slides.forEach((slide, index) => {
-      const slideImage = slide.querySelector('img');
-      if (slideImage) {
-        slideImage.addEventListener('dragstart', (e) => e.preventDefault());
-      }
+      slide.addEventListener("touchstart", touchStart(index), { passive: true });
+      slide.addEventListener("touchend", touchEnd);
+      slide.addEventListener("touchmove", touchMove, { passive: true });
 
-      // Touch events
-      slide.addEventListener('touchstart', touchStart(index), { passive: true });
-      slide.addEventListener('touchend', touchEnd);
-      slide.addEventListener('touchmove', touchMove, { passive: true });
-
-      // Mouse events
-      slide.addEventListener('mousedown', touchStart(index));
-      slide.addEventListener('mouseup', touchEnd);
-      slide.addEventListener('mouseleave', () => {
+      slide.addEventListener("mousedown", touchStart(index));
+      slide.addEventListener("mouseup", touchEnd);
+      slide.addEventListener("mouseleave", () => {
         if (isDragging) touchEnd();
       });
-      slide.addEventListener('mousemove', touchMove);
+      slide.addEventListener("mousemove", touchMove);
     });
 
-    // Configuración inicial
-    viewport.style.cursor = 'grab';
-    track.style.transition = 'transform 0.4s ease-out';
-    
-    // Iniciar autoplay
+    viewport.style.cursor = "grab";
+    track.style.transition = "transform 0.4s ease-out";
+
     console.log("Iniciando autoplay...");
     startAutoplay();
   } else {
@@ -229,9 +216,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ==========================
      3. SLIDER ROTULACIÓN VEHICULAR
-  =========================== */
-
-  const vViewport = document.querySelector("#galeria-vehicular .vehicular-viewport");
+  ========================== */
+  const vViewport = document.querySelector(
+    "#galeria-vehicular .vehicular-viewport"
+  );
   const vTrack = document.querySelector("#galeria-vehicular .vehicular-track");
   const vItems = document.querySelectorAll("#galeria-vehicular .vehicular-item");
 
@@ -245,16 +233,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function vStartAutoplay() {
       if (vAutoTimer) clearInterval(vAutoTimer);
-      
+
       vAutoTimer = setInterval(() => {
         const itemWidth = vItems[0].offsetWidth;
         const gap = parseFloat(getComputedStyle(vTrack).gap || "20") || 20;
         const maxScroll = vViewport.scrollWidth - vViewport.offsetWidth;
-        
+
         if (vViewport.scrollLeft >= maxScroll - 5) {
-          vViewport.scrollTo({ left: 0, behavior: 'smooth' });
+          vViewport.scrollTo({ left: 0, behavior: "smooth" });
         } else {
-          vViewport.scrollBy({ left: itemWidth + gap, behavior: 'smooth' });
+          vViewport.scrollBy({ left: itemWidth + gap, behavior: "smooth" });
         }
       }, 3500);
     }
@@ -266,7 +254,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Mouse
     vViewport.addEventListener("mousedown", (e) => {
       vIsDragging = true;
       vViewport.style.cursor = "grabbing";
@@ -276,224 +263,202 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("mouseup", () => {
-      if (vIsDragging) {
-        vIsDragging = false;
-        vViewport.style.cursor = "grab";
-        setTimeout(vStartAutoplay, 2000);
-      }
+      if (!vIsDragging) return;
+      vIsDragging = false;
+      vViewport.style.cursor = "grab";
+      setTimeout(vStartAutoplay, 2000);
     });
 
     window.addEventListener("mousemove", (e) => {
       if (!vIsDragging) return;
       e.preventDefault();
-      const x = e.pageX;
-      const walk = (vStartX - x);
+      const walk = vStartX - e.pageX;
       vViewport.scrollLeft = vScrollLeft + walk;
     });
 
-    // Touch
-    vViewport.addEventListener("touchstart", () => vStopAutoplay(), { passive: true });
-    vViewport.addEventListener("touchend", () => setTimeout(vStartAutoplay, 2000), { passive: true });
+    vViewport.addEventListener("touchstart", vStopAutoplay, { passive: true });
+    vViewport.addEventListener("touchend", () => setTimeout(vStartAutoplay, 2000), {
+      passive: true,
+    });
 
     vStartAutoplay();
   }
 
   /* ==========================
      4. HEADER HIDE/SHOW
-  =========================== */
-
+  ========================== */
   const header = document.querySelector(".header");
   let lastY = window.scrollY;
 
-  window.addEventListener("scroll", () => {
-    const y = window.scrollY;
-    if (y > 80 && y > lastY) {
-      header.classList.add("header-hide");
-    } else {
-      header.classList.remove("header-hide");
-    }
-    lastY = y;
-  }, { passive: true });
+  if (header) {
+    window.addEventListener(
+      "scroll",
+      () => {
+        const y = window.scrollY;
+        if (y > 80 && y > lastY) header.classList.add("header-hide");
+        else header.classList.remove("header-hide");
+        lastY = y;
+      },
+      { passive: true }
+    );
+  }
 
-/* ==========================
-   5. CARRUSEL DE LOGOS - ARRASTRE TIPO SLIDER
-=========================== */
+  /* ==========================
+     5. CARRUSEL DE LOGOS - ARRASTRE + HOVER COLOR (FIX)
+  =========================== */
+  const brandsWrapper = document.querySelector(".brands-carousel-wrapper");
+  const brandsTrack = document.querySelector(".brands-carousel-track");
 
-const brandsWrapper = document.querySelector('.brands-carousel-wrapper');
-const brandsTrack = document.querySelector('.brands-carousel-track');
+  if (brandsWrapper && brandsTrack) {
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
 
-if (brandsWrapper && brandsTrack) {
-  let isDragging = false;
-  let startX = 0;
-  let scrollLeft = 0;
-  let animationID = 0;
+    const imgs = Array.from(brandsTrack.querySelectorAll("img"));
 
-  // Prevenir comportamiento por defecto en imágenes
-  brandsTrack.querySelectorAll('img').forEach(img => {
-    img.addEventListener('dragstart', (e) => e.preventDefault());
-  });
+    // ✅ Bloquear drag/selección de imágenes (evita “arrastrar para copiar”)
+    imgs.forEach((img) => {
+      img.setAttribute("draggable", "false");
+      img.style.userSelect = "none";
+      img.style.webkitUserDrag = "none";
+      img.addEventListener("dragstart", (e) => e.preventDefault());
+    });
 
-  // Mouse down - iniciar arrastre
-  brandsWrapper.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    startX = e.pageX - brandsWrapper.offsetLeft;
-    scrollLeft = brandsWrapper.scrollLeft;
-    brandsWrapper.style.cursor = 'grabbing';
-    brandsTrack.style.animationPlayState = 'paused';
-  });
+    brandsWrapper.style.cursor = "grab";
 
-  // Mouse up - finalizar arrastre
-  const handleMouseUp = () => {
-    if (isDragging) {
+    brandsWrapper.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.pageX - brandsWrapper.offsetLeft;
+      scrollLeft = brandsWrapper.scrollLeft;
+      brandsWrapper.style.cursor = "grabbing";
+      brandsTrack.style.animationPlayState = "paused";
+    });
+
+    const stopDrag = () => {
+      if (!isDragging) return;
       isDragging = false;
-      brandsWrapper.style.cursor = 'grab';
-      
-      // Reanudar animación después de 2 segundos
+      brandsWrapper.style.cursor = "grab";
+
       setTimeout(() => {
-        brandsTrack.style.animationPlayState = 'running';
+        brandsTrack.style.animationPlayState = "running";
       }, 2000);
-    }
-  };
+    };
 
-  brandsWrapper.addEventListener('mouseup', handleMouseUp);
-  document.addEventListener('mouseup', handleMouseUp);
+    brandsWrapper.addEventListener("mouseup", stopDrag);
+    document.addEventListener("mouseup", stopDrag);
 
-  // Mouse leave - finalizar arrastre si sale del área
-  brandsWrapper.addEventListener('mouseleave', () => {
-    if (isDragging) {
+    brandsWrapper.addEventListener("mouseleave", () => {
+      if (!isDragging) return;
       isDragging = false;
-      brandsWrapper.style.cursor = 'grab';
-    }
+      brandsWrapper.style.cursor = "grab";
+    });
+
+    brandsWrapper.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - brandsWrapper.offsetLeft;
+      const walk = x - startX;
+      brandsWrapper.scrollLeft = scrollLeft - walk;
+    });
+
+    brandsWrapper.addEventListener(
+      "touchstart",
+      () => {
+        brandsTrack.style.animationPlayState = "paused";
+      },
+      { passive: true }
+    );
+
+    brandsWrapper.addEventListener(
+      "touchend",
+      () => {
+        setTimeout(() => {
+          brandsTrack.style.animationPlayState = "running";
+        }, 2000);
+      },
+      { passive: true }
+    );
+
+    console.log("✅ Carrusel con arrastre tipo slider activado");
+  }
+
+  // ✅ CAMBIO DE COLOR EN LOGOS (hover) - UNA SOLA VEZ, ROBUSTO
+  document.querySelectorAll(".brand-logo-carousel").forEach((logo) => {
+    const src = logo.getAttribute("src");
+    if (!src) return;
+
+    const isRojo = src.includes("Rojo");
+    const rojoSrc = isRojo ? src : src.replace(/(\.\w+)$/, "Rojo$1");
+    const normalSrc = isRojo ? src.replace("Rojo", "") : src;
+
+    logo.dataset.srcNormal = normalSrc;
+    logo.dataset.srcRojo = rojoSrc;
+
+    // bloquear drag también aquí
+    logo.setAttribute("draggable", "false");
+    logo.style.userSelect = "none";
+    logo.style.webkitUserDrag = "none";
+    logo.addEventListener("dragstart", (e) => e.preventDefault());
+
+    logo.addEventListener("mouseenter", () => {
+      logo.src = logo.dataset.srcNormal;
+    });
+
+    logo.addEventListener("mouseleave", () => {
+      logo.src = logo.dataset.srcRojo;
+    });
   });
 
-  // Mouse move - realizar el arrastre (igual que el slider principal)
-  brandsWrapper.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    
-    const x = e.pageX - brandsWrapper.offsetLeft;
-    const walk = x - startX;
-    brandsWrapper.scrollLeft = scrollLeft - walk;
-  });
-
-  // Touch events para móviles
-  brandsWrapper.addEventListener('touchstart', () => {
-    brandsTrack.style.animationPlayState = 'paused';
-  }, { passive: true });
-
-  brandsWrapper.addEventListener('touchend', () => {
-    setTimeout(() => {
-      brandsTrack.style.animationPlayState = 'running';
-    }, 2000);
-  }, { passive: true });
-
-  console.log("✅ Carrusel con arrastre tipo slider activado");
-}
-
-// CAMBIO DE COLOR EN LOGOS (hover)
-document.querySelectorAll('.brand-logo-carousel').forEach(logo => {
-  const src = logo.getAttribute('src');
-  
-  if (src && src.includes('Rojo')) {
-    const normalSrc = src.replace('Rojo', '');
-    const rojoSrc = src;
-    
-    logo.addEventListener('mouseenter', () => {
-      logo.src = normalSrc;
-    });
-    
-    logo.addEventListener('mouseleave', () => {
-      logo.src = rojoSrc;
-    });
-  }
-});
-
-console.log("✅ Cambio de color en logos activado");
-
-// CAMBIO DE COLOR EN LOGOS (hover)
-document.querySelectorAll('.brand-logo-carousel').forEach(logo => {
-  const src = logo.getAttribute('src');
-  
-  if (src && src.includes('Rojo')) {
-    const normalSrc = src.replace('Rojo', '');
-    const rojoSrc = src;
-    
-    logo.addEventListener('mouseenter', () => {
-      logo.src = normalSrc;
-    });
-    
-    logo.addEventListener('mouseleave', () => {
-      logo.src = rojoSrc;
-    });
-  }
-});
-
-console.log("✅ Cambio de color en logos activado");
-
-// CAMBIO DE COLOR EN LOGOS (hover)
-document.querySelectorAll('.brand-logo-carousel').forEach(logo => {
-  const src = logo.getAttribute('src');
-  
-  if (src && src.includes('Rojo')) {
-    const normalSrc = src.replace('Rojo', '');
-    const rojoSrc = src;
-    
-    logo.addEventListener('mouseenter', () => {
-      logo.src = normalSrc;
-    });
-    
-    logo.addEventListener('mouseleave', () => {
-      logo.src = rojoSrc;
-    });
-  }
-});
-
-console.log("✅ Cambio de color en logos activado");
+  console.log("✅ Cambio de color en logos activado");
 
   /* ==========================
      6. FONDO DINÁMICO BANNER
-  =========================== */
+  ========================== */
   (function () {
-  const section = document.querySelector('.section-galeria');
-  if (!section) return;
+    const section = document.querySelector(".section-galeria");
+    if (!section) return;
 
-  const imgs = Array.from(section.querySelectorAll('.galeria-slide img'));
-  if (!imgs.length) return;
+    const imgs = Array.from(section.querySelectorAll(".galeria-slide img"));
+    if (!imgs.length) return;
 
-  let i = 0;
-  let bgTimer = null;
+    // Bloquear drag/selección del fondo también (por si acaso)
+    imgs.forEach((img) => {
+      img.setAttribute("draggable", "false");
+      img.style.userSelect = "none";
+      img.style.webkitUserDrag = "none";
+      img.addEventListener("dragstart", (e) => e.preventDefault());
+    });
 
-  function setBg(idx) {
-    const src = imgs[idx]?.getAttribute('src');
-    if (!src) return;
+    let i = 0;
+    let bgTimer = null;
 
-    // Se pasa la imagen a CSS
-    section.style.setProperty('--banner-image', `url("${src}")`);
-  }
-
-  setBg(0);
-
-  bgTimer = setInterval(() => {
-    i = (i + 1) % imgs.length;
-    setBg(i);
-  }, 4000);
-
-  section.addEventListener('mouseenter', () => {
-    if (bgTimer) {
-      clearInterval(bgTimer);
-      bgTimer = null;
+    function setBg(idx) {
+      const src = imgs[idx]?.getAttribute("src");
+      if (!src) return;
+      section.style.setProperty("--banner-image", `url("${src}")`);
     }
-  });
 
-  section.addEventListener('mouseleave', () => {
-    if (!bgTimer) {
+    function startBg() {
+      stopBg();
       bgTimer = setInterval(() => {
         i = (i + 1) % imgs.length;
         setBg(i);
       }, 4000);
     }
-  });
-})();
 
+    function stopBg() {
+      if (bgTimer) {
+        clearInterval(bgTimer);
+        bgTimer = null;
+      }
+    }
 
+    setBg(0);
+    startBg();
+
+    section.addEventListener("mouseenter", stopBg);
+    section.addEventListener("mouseleave", () => {
+      if (!bgTimer) startBg();
+    });
+  })();
 });
