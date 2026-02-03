@@ -36,7 +36,6 @@ body{
   transition:padding-top .25s ease;
 }
 
-body.header-visible{ padding-top:110px; }
 
 img{
   max-width:100%;
@@ -50,26 +49,32 @@ img{
 }
 
 /* =========================
-   HEADER
+   HEADER – ROJO OSCURO (como la 1ª imagen)
 ========================= */
 .header{
-  position:fixed;
-  top:0; left:0; right:0;
-  z-index:999;
-  transition:transform .28s ease, opacity .28s ease;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+
+  transition: transform .28s ease, opacity .28s ease;
 
   backdrop-filter: blur(22px);
+
+  /* Rojo profundo + elegante */
   background: linear-gradient(
     to bottom,
-    rgba(155,0,0,.55),
-    rgba(172,146,146,.25),
-    transparent
+    rgba(120, 0, 0, 0.92),
+    rgba(109, 0, 0, 0.904),
+    rgb(155, 3, 3)
   );
 }
 
+/* animación al ocultarse */
 .header.header-hide{
-  transform:translateY(-110%);
-  opacity:0;
+  transform: translateY(-110%);
+  opacity: 0;
 }
 
 .header-content{
@@ -160,6 +165,14 @@ img{
    HERO (VIDEO)
 ========================= */
 .hero{ padding:4.5rem 0 3.5rem; }
+/* Evita que el fondo blanco del body se vea arriba del hero */
+.hero.hero-multimagen{
+  margin-top: 0;
+  padding-top: 6rem; /* mantenga su padding */
+  background: #4a0000; /* rojo oscuro detrás del video */
+}
+
+
 
 .hero.hero-multimagen{
   position:relative;
@@ -1113,3 +1126,140 @@ img{
   .contacto-title{ font-size:1.5rem; }
   .contacto-subtitle{ font-size:.9rem; }
 }
+
+/* Mejor accesibilidad: foco visible al navegar con teclado */
+.btn:focus-visible,
+.nav a:focus-visible,
+.card-btn:focus-visible {
+  outline: 3px solid rgba(255, 0, 0, 0.65);
+  outline-offset: 3px;
+}
+
+/* =========================
+   CTA (MEJORADA)
+========================= */
+.cta{
+  position:relative;
+  padding:4.2rem 0;
+  overflow:hidden;
+}
+
+/* glow suave de fondo */
+.cta::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:
+    radial-gradient(circle at 30% 35%, rgb(255, 255, 255), transparent 100%),
+    radial-gradient(circle at 70% 55%, rgb(255, 255, 255), transparent 100%),
+    radial-gradient(circle at 45% 85%, rgb(255, 255, 255), transparent 100%);
+  filter: blur(30px);
+  opacity:.9;
+  pointer-events:none;
+}
+
+.cta-card{
+  position:relative;
+  text-align:center;
+  border-radius:32px;
+  padding:2.6rem 2.2rem 2rem;
+  border:1px solid rgba(255,0,0,.22);
+  box-shadow:
+    0 28px 80px rgba(255, 0, 0, 0.76);
+
+  /* glass oscuro estilo Multiimagen */
+  background:
+    radial-gradient(circle at top left, rgba(255,0,0,.12), transparent 55%),
+    linear-gradient(180deg, rgb(133, 0, 0), rgb(255, 0, 0));
+  backdrop-filter: blur(16px);
+}
+
+.cta-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:32px;
+  pointer-events:none;
+  background: linear-gradient(135deg, rgba(0, 255, 13, 0.25), rgba(255,255,255,.10), rgba(255,0,0,.20));
+  opacity:.35;
+  mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  padding:1px; /* “borde brillante” */
+  box-sizing:border-box;
+}
+/*Calidad y experiencia*/
+.cta-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  padding:.38rem .85rem;
+  border-radius:999px;
+  font-size:.85rem;
+  letter-spacing:.01em;
+  color:rgba(255,255,255,.92);
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,0,0,.22);
+  margin-bottom:1rem;
+}
+/*Letras grandes*/
+.cta-title{
+  margin:.2rem 0 .85rem;
+  font-size:clamp(1.55rem, 2.6vw, 2.25rem);
+  line-height:1.15;
+  color:#fff;
+  text-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.cta-text{
+  margin:0 auto 1.45rem;
+  max-width:58ch;
+  color:rgba(255,255,255,.86);
+  line-height:1.65;
+  font-size:1.02rem;
+}
+
+.cta-actions{
+  display:flex;
+  gap:.75rem;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:1.3rem;
+}
+
+/* Botón principal: blanco */
+.cta .cta-actions .cta-btn{
+  background: #fff !important;
+  color: #b30000 !important; /*Color del texto adentro del boton*/
+  border: 1px solid rgba(255,255,255,.85) !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+  transform: translateY(0);
+}
+
+/* Hover: se pone rojo */
+.cta .cta-actions .cta-btn:hover{
+  background: linear-gradient(135deg, rgb(0, 0, 0), #580919) !important;
+  color: #fff !important;
+  border-color: rgba(255,0,0,.9) !important;
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 16px 40px rgba(0,0,0,.25);
+}
+
+/* Click/press: rojo más “hundido” */
+.cta .cta-actions .cta-btn:active{
+  transform: translateY(0) scale(.99);
+  box-shadow: 0 10px 22px rgba(0,0,0,.22);
+}
+
+/* Accesibilidad: foco visible (teclado) */
+.cta .cta-actions .cta-btn:focus-visible{
+  outline: 3px solid rgba(255,255,255,.75);
+  outline-offset: 3px;
+}
+
+
+
+@media (max-width: 600px){
+  .cta-card{ padding:2.1rem 1.35rem 1.6rem; }
+  .cta-text{ font-size:.98rem; }
+}
+
