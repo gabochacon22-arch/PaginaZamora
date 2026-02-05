@@ -63,7 +63,7 @@ header{
   backdrop-filter: blur(22px);
 
   /* ✅ Header blanco */
-  background: rgba(197, 192, 192, 0.92);
+  background: rgba(253, 252, 252, 0.92);
   border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 /* animación al ocultarse */
@@ -900,17 +900,16 @@ header{
   padding-top:1.2rem;
   border-top:1px solid rgba(2,6,23,.08);
   text-align:center;
-  color:rgba(2,6,23,.75);
+  color:rgba(77, 5, 23, 0.75);
 }
 
 /* Banda oscura (abajo) */
 .footer-fusion .footer-main{
   background:
-    radial-gradient(circle at top left, rgba(255,0,0,.12), transparent 55%),
-    linear-gradient(180deg, var(--bg-alt), var(--card-bg));
-  color:var(--text-main);
+    radial-gradient(circle at top left, rgba(255,0,0,.25), transparent 55%),
+    linear-gradient(180deg, #1a0000, #000);
   padding:4rem 0 0;
-  border-top:1px solid rgba(255,0,0,.18);
+  border-top:1px solid rgb(54, 5, 5);
 }
 
 .footer-main-grid{
@@ -1258,3 +1257,16 @@ header{
   .cta-text{ font-size:.98rem; }
 }
 
+/* ===== CAMBIO DE COLOR BOTÓN "VOLVER A SERVICIOS" ===== */
+.btn-volver{
+  background-color: #000 !important;   /* fondo */
+  color: #fff !important;              /* texto */
+  border-color: #000 !important;        /* borde */
+}
+
+/* Hover */
+.btn-volver:hover{
+  background-color: #b30000 !important;
+  border-color: #b30000 !important;
+  color: #fff !important;
+}
