@@ -1,4 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  // ==========================
+  // HEADER / FOOTER (COMPONENTES)
+  // ==========================
+  function loadComponent(selector, filePath) {
+    fetch(filePath)
+      .then((response) => {
+        if (!response.ok) throw new Error(`No se pudo cargar ${filePath}`);
+        return response.text();
+      })
+      .then((html) => {
+        const el = document.querySelector(selector);
+        if (!el) return;
+        el.innerHTML = html;
+      })
+      .catch((error) => console.error("Error cargando componente:", filePath, error));
+  }
+
+  loadComponent("#header", "../components/Header.html");
+  loadComponent("#footer", "../components/Footer.html");
+
   /* ==========================
      0. GOOGLE FORM EMBEBIDO
   ========================== */
@@ -379,8 +400,85 @@ document.addEventListener("DOMContentLoaded", () => {
       { passive: true }
     );
 
-    console.log("✅ Carrusel con arrastre tipo slider activado");
   }
+// ==========================
+// 5B. SEGUNDA FILA DEL CARRUSEL (sentido contrario)
+// ==========================
+const brandsWrapper2 = document.querySelector(".brands-carousel-wrapper2");
+const brandsTrack2 = document.querySelector(".brands-carousel-track2");
+
+if (brandsWrapper2 && brandsTrack2) {
+  let isDragging2 = false;
+  let startX2 = 0;
+  let scrollLeft2 = 0;
+
+  const imgs2 = Array.from(brandsTrack2.querySelectorAll("img"));
+
+  imgs2.forEach((img) => {
+    img.setAttribute("draggable", "false");
+    img.style.userSelect = "none";
+    img.style.webkitUserDrag = "none";
+    img.addEventListener("dragstart", (e) => e.preventDefault());
+  });
+
+  brandsWrapper2.style.cursor = "grab";
+
+  brandsWrapper2.addEventListener("mousedown", (e) => {
+    isDragging2 = true;
+    startX2 = e.pageX - brandsWrapper2.offsetLeft;
+    scrollLeft2 = brandsWrapper2.scrollLeft;
+    brandsWrapper2.style.cursor = "grabbing";
+    brandsTrack2.style.animationPlayState = "paused";
+  });
+
+  const stopDrag2 = () => {
+    if (!isDragging2) return;
+    isDragging2 = false;
+    brandsWrapper2.style.cursor = "grab";
+
+    setTimeout(() => {
+      brandsTrack2.style.animationPlayState = "running";
+    }, 2000);
+  };
+
+  brandsWrapper2.addEventListener("mouseup", stopDrag2);
+  document.addEventListener("mouseup", stopDrag2);
+
+  brandsWrapper2.addEventListener("mouseleave", () => {
+    if (!isDragging2) return;
+    isDragging2 = false;
+    brandsWrapper2.style.cursor = "grab";
+  });
+
+  brandsWrapper2.addEventListener("mousemove", (e) => {
+    if (!isDragging2) return;
+    e.preventDefault();
+    const x = e.pageX - brandsWrapper2.offsetLeft;
+    const walk = x - startX2;
+    brandsWrapper2.scrollLeft = scrollLeft2 - walk;
+  });
+
+  brandsWrapper2.addEventListener(
+    "touchstart",
+    () => {
+      brandsTrack2.style.animationPlayState = "paused";
+    },
+    { passive: true }
+  );
+
+  brandsWrapper2.addEventListener(
+    "touchend",
+    () => {
+      setTimeout(() => {
+        brandsTrack2.style.animationPlayState = "running";
+      }, 2000);
+    },
+    { passive: true }
+  );
+
+  console.log("✅ Carrusel fila 2 con arrastre activado");
+}
+
 
   // ✅ CAMBIO DE COLOR EN LOGOS (hover) - UNA SOLA VEZ, ROBUSTO
   document.querySelectorAll(".brand-logo-carousel").forEach((logo) => {

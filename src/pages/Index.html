@@ -2,18 +2,17 @@
 <html lang="es">
 
 <head>
-  <link rel="icon" type="image/png" href="imagenes/LogoRamita.png">
+  <link rel="icon" type="image/png" href="/public/imagenes/LogoRamita.png">
+  <link rel="stylesheet" href="../styles/home.css">
+  <link rel="stylesheet" href="../styles/layout.css">
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multiimagen</title>
 
-  <!-- Fuente moderna -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
 
-  <!-- Tu CSS principal -->
-  <link rel="stylesheet" href="PaginaAle.css" />
 </head>
 
 <body>
@@ -21,28 +20,13 @@
   <div class="floating-shape shape-1"></div>
   <div class="floating-shape shape-2"></div>
 
-  <header class="header">
-    
-    <div class="container header-content">
-      <div class="logo">
-        <img src="imagenes/logoMultiImagen.png" alt="Logo Multiimagen">
-      </div>
-
-      <nav class="nav">
-        <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-
-      <button class="btn btn-outline">Hablemos</button>
-    </div>
-  </header>
+  <!-- Header -->
+  <div id="header"></div>
 
   <!-- HERO CON VIDEO DE FONDO -->
   <section id="inicio" class="hero hero-multimagen">
     <video class="hero-video" autoplay muted loop playsinline>
-      <source src="videos/testeo.mp4" type="video/mp4" />
+      <source src="/public/videos/testeo.mp4" type="video/mp4" />
     </video>
 
     <div class="hero-overlay"></div>
@@ -110,7 +94,7 @@
 
         <article class="card card-roja reveal">
           <h3>Rótulos Luminosos</h3>
-          <img src="imagenes/imagen1RM.jpg" alt="Rótulo luminoso 1">
+          <img src="/public/imagenes/imagen1RM.jpg" alt="Rótulo luminoso 1">
           <button class="card-btn ver-galeria" data-galeria="luminosos">
             Más detalles
           </button>
@@ -118,7 +102,7 @@
 
         <article class="card card-blanca reveal">
           <h3>Rotulación Vehicular</h3>
-          <img src="imagenes/PortadaCard2.jpeg" alt="Rotulación Vehicular 1">
+          <img src="/public/imagenes/imagen1RM.jpg" alt="Rotulación Vehicular 1">
           <button class="card-btn ver-galeria" data-galeria="vehicular">
             Más detalles
           </button>
@@ -126,7 +110,7 @@
 
         <article class="card card-roja reveal">
           <h3>Rotulación interna</h3>
-          <img src="imagenes/imagen1RM.jpg" alt="Rotulación Interna 1">
+          <img src="/public/imagenes/imagen1RM.jpg" alt="Rotulación Interna 1">
           <button class="card-btn ver-galeria" data-galeria="interna">
             Más detalles
           </button>
@@ -134,7 +118,7 @@
 
         <article class="card card-blanca reveal">
           <h3>Impresión Digital</h3>
-          <img src="imagenes/imagen1RM.jpg" alt="Impresión Digital 1">
+          <img src="/public/imagenes/imagen1RM.jpg" alt="Impresión Digital 1">
           <button class="card-btn ver-galeria" data-galeria="digital">
             Más detalles
           </button>
@@ -142,7 +126,7 @@
 
         <article class="card card-roja reveal">
           <h3>Letras de Relieve</h3>
-          <img src="imagenes/imagen1RM.jpg" alt="Letras de Relieve 1">
+          <img src="/public/imagenes/imagen1RM.jpg" alt="Letras de Relieve 1">
           <button class="card-btn ver-galeria" data-galeria="relieve">
             Más detalles
           </button>
@@ -150,7 +134,7 @@
 
         <article class="card card-blanca reveal">
           <h3>Sistema de Exhibición Modulares</h3>
-          <img src="imagenes/imagen1RM.jpg" alt="Sistema Exhibición Modular 1">
+          <img src="/public/imagenes/imagen1RM.jpg" alt="Sistema Exhibición Modular 1">
           <button class="card-btn ver-galeria" data-galeria="exhibicion">
             Más detalles
           </button>
@@ -158,23 +142,23 @@
 
         <article class="card card-roja reveal">
           <h3>Vallas</h3>
-          <img src="imagenes/imagen1RM.jpg" alt="Vallas 1">
+          <img src="/public/imagenes/imagen1RM.jpg" alt="Vallas 1">
           <button class="card-btn ver-galeria" data-galeria="vallas">
             Más detalles
           </button>
         </article>
 
         <article class="card card-blanca reveal">
-          <h3>Merchandising</h3>
-          <img src="imagenes/imagen1RM.jpg" alt="Merchandising 1">
-          <button class="card-btn ver-galeria" data-galeria="merchandising">
+          <h3>Totems</h3>
+          <img src="/public/imagenes/imagen1RM.jpg" alt="Totems1 1">
+          <button class="card-btn ver-galeria" data-galeria="totems">
             Más detalles
           </button>
         </article>
 
         <article class="card card-roja reveal">
           <h3>Plumas</h3>
-          <img src="imagenes/imagen1RM.jpg" alt="Plumas 1">
+          <img src="/public/imagenes/imagen1RM.jpg" alt="Plumas 1">
           <button class="card-btn ver-galeria" data-galeria="plumas">
             Más detalles
           </button>
@@ -192,10 +176,9 @@
      Además, los productos pueden ser iluminados con fluorescentes, LEDs o neón.
      </p>
 
-       <img src="imagenes/RotuloLico.jpg" alt="Rótulo Luminoso Lico">
-      <img src="imagenes/RotuloCariari.jpg" alt="Rótulo Luminoso Cariari">
-    <img src="imagenes/RotuloMusi.jpg" alt="Rótulo Luminoso Musi">
-  <img src="imagenes/RotuloAloha.png" alt="Rótulo Luminoso Aloha">
+      <img src="/public/imagenes/RotuloLico.jpg" alt="Rótulo Luminoso Lico">
+      <img src="/public/imagenes/RotuloMusi.jpg" alt="Rótulo Luminoso Musi">
+      <img src="/public/imagenes/RotuloAloha.png" alt="Rótulo Luminoso Aloha">
   </div>
         <button class="btn btn-outline btn-volver">← Volver a servicios</button>
       </div>
@@ -240,8 +223,8 @@
           con los más estrictos criterios de servicio y calidad.
         </p>
         <div class="galeria-grid">
-          <img src="imagenes/RotVeh1.jpeg" alt="Rotulación interna 1">
-          <img src="imagenes/RotVeh2.jpeg" alt="Rotulación interna 2">
+          <img src="/public/imagenes/RotVeh1.jpeg" alt="Rotulación interna 1">
+          <img src="/public/imagenes/RotVeh2.jpeg" alt="Rotulación interna 2">
         </div>
         <button class="btn btn-outline btn-volver">← Volver a servicios</button>
       </div>
@@ -254,9 +237,9 @@
           avanzada.
         </p>
         <div class="galeria-grid">
-          <img src="imagenes/ImpresionMusmani.jpg" alt="Impresión Musmani 1">
-         <img src="imagenes/ImpresionMusmani2.jpg" alt="Impresión Musmani 2">
-         <img src="imagenes/ImpresionMusmani3.jpg" alt="Impresión Musmani 3">
+          <img src="/public/imagenes/ImpresionMusmani.jpg" alt="Impresión Musmani 1">
+         <img src="/public/imagenes/ImpresionMusmani2.jpg" alt="Impresión Musmani 2">
+         <img src="/public/imagenes/ImpresionMusmani3.jpg" alt="Impresión Musmani 3">
       </div>
         <button class="btn btn-outline btn-volver">← Volver a servicios</button>
       </div>
@@ -269,8 +252,8 @@
           aluminio, PVC, acrílico y policarbonato.
         </p>
         <div class="galeria-grid">
-         <img src="imagenes/LaRamblaRelieve.jpg" alt="La Rambla - Letras de Relieve">
-          <img src="imagenes/AnfiteatroCoca.jpg" alt="Anfiteatro Coca Cola - Letras de Relieve">
+         <img src="/public/imagenes/LaRamblaRelieve.jpg" alt="La Rambla - Letras de Relieve">
+          <img src="/public/imagenes/AnfiteatroCoca.jpg" alt="Anfiteatro Coca Cola - Letras de Relieve">
         </div>
 
         <button class="btn btn-outline btn-volver">← Volver a servicios</button>
@@ -284,8 +267,8 @@
           de sistemas de exhibición modulares.
         </p>
         <div class="galeria-grid">
-          <img src="imagenes/interna1SEM.jpg" alt="Sistemas de Exhibición 1">
-          <img src="imagenes/interna2SEM.jpg" alt="Sistemas de Exhibición 2">
+          <img src="/public/imagenes/ImagenSistExhMod1.jpeg" alt="Sistemas de Exhibición 1">
+          <img src="/public/imagenes/ImagenSistExhMod2.jpeg" alt="Sistemas de Exhibición 2">
         </div>
         <button class="btn btn-outline btn-volver">← Volver a servicios</button>
       </div>
@@ -298,21 +281,23 @@
           en puntos estratégicos.
         </p>
         <div class="galeria-grid">
-         <img src="imagenes/VallaFusion.jpg" alt="Valla Publicitaria Fusion">
-          <img src="imagenes/VallaSalonDeEventos.jpg" alt="Valla Salón de Eventos">
+         <img src="/public/imagenes/ImagenVallas1.jpg" alt="Valla Publicitaria Fusion">
+          <img src="/public/imagenes/ImagenVallas2.jpg" alt="Valla Salón de Eventos">
+          <img src="/public/imagenes/ImagenVallas3.jpg" alt="Valla Publicitaria Musmani">
         </div>
         <button class="btn btn-outline btn-volver">← Volver a servicios</button>
       </div>
 
-      <!-- GALERÍA: MERCHANDISING -->
-      <div class="galeria-servicio" id="galeria-merchandising">
-        <h3>Merchandising</h3>
+      <!-- GALERÍA: TOTEMS -->
+      <div class="galeria-servicio" id="galeria-totems">
+        <h3>Totems</h3>
         <p>
           Productos promocionales y materiales P.O.P. para fortalecer presencia de marca en el punto de venta.
         </p>
         <div class="galeria-grid">
-          <img src="imagenes/interna1M.jpg" alt="Merchandising 1">
-          <img src="imagenes/interna2M.jpg" alt="Merchandising 2">
+          <img src="/public/imagenes/ImagenTotem1.jpg" alt="Totem 1">
+          <img src="/public/imagenes/ImagenTotem2.jpg" alt="Totem 2">
+          <img src="/public/imagenes/ImagenTotem3.jpg" alt="Totem 3">
         </div>
         <button class="btn btn-outline btn-volver">← Volver a servicios</button>
       </div>
@@ -324,8 +309,8 @@
           Plumas publicitarias ideales para eventos y activaciones: visibles, ligeras y de gran impacto.
         </p>
         <div class="galeria-grid">
-          <img src="imagenes/interna1PL.jpeg" alt="Plumas 1">
-          <img src="imagenes/interna2PL.jpeg" alt="Plumas 2">
+          <img src="/public/imagenes/interna1PL.jpeg" alt="Plumas 1">
+          <img src="/public/imagenes/interna2PL.jpeg" alt="Plumas 2">
         </div>
         <button class="btn btn-outline btn-volver">← Volver a servicios</button>
       </div>
@@ -338,7 +323,7 @@
     <div class="container about-grid">
 
       <div class="about-image">
-        <img src="imagenes/breteador.png" alt="Equipo de trabajo Multiimagen">
+        <img src="/public/imagenes/breteador.png" alt="Equipo de trabajo Multiimagen">
       </div>
 
       <div class="about-text">
@@ -372,32 +357,36 @@
   <section id="marcas" class="section section-brands">
     <div class="container">
       <h2 class="brands-title">Marcas que han confiado en Multiimagen:</h2>
-
+        <!-- Primera fila -->
       <div class="brands-carousel-wrapper">
         <div class="brands-carousel-track">
-          <!-- Primera copia -->
-          <img src="imagenes/LogoIceRojo.png" alt="Ice" class="brand-logo-carousel" />
-          <img src="imagenes/cocacolalogo.png" alt="Coca Cola" class="brand-logo-carousel" />
-          <img src="imagenes/LogobcrRojo.png" alt="BCR" class="brand-logo-carousel" />
-          <img src="imagenes/davivienda.png" alt="Davivienda" class="brand-logo-carousel" />
-          <img src="imagenes/LogoBNRojo.png" alt="BN" class="brand-logo-carousel" />
-          <img src="imagenes/LogoFifcoRojo.png" alt="Fifco" class="brand-logo-carousel" />
-          <img src="imagenes/LogoMegasuperRojo.png" alt="Mega Super" class="brand-logo-carousel" />
-          <img src="imagenes/LogoDosPinosRojo.png" alt="Dos Pinos" class="brand-logo-carousel" />
-          <img src="imagenes/LogoBPRojo.png" alt="BP" class="brand-logo-carousel" />
-
-          <!-- Segunda copia -->
-          <img src="imagenes/LogoIceRojo.png" alt="Ice" class="brand-logo-carousel" />
-          <img src="imagenes/cocacolalogo.png" alt="Coca Cola" class="brand-logo-carousel" />
-          <img src="imagenes/LogobcrRojo.png" alt="BCR" class="brand-logo-carousel" />
-          <img src="imagenes/davivienda.png" alt="Davivienda" class="brand-logo-carousel" />
-          <img src="imagenes/LogoBNRojo.png" alt="BN" class="brand-logo-carousel" />
-          <img src="imagenes/LogoFifcoRojo.png" alt="Fifco" class="brand-logo-carousel" />
-          <img src="imagenes/LogoMegasuperRojo.png" alt="Mega Super" class="brand-logo-carousel" />
-          <img src="imagenes/LogoDosPinosRojo.png" alt="Dos Pinos" class="brand-logo-carousel" />
-          <img src="imagenes/LogoBPRojo.png" alt="BP" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoIceRojo.png" alt="Ice" class="brand-logo-carousel" />
+          <img src="/public/imagenes/cocacolalogo.png" alt="Coca Cola" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogobcrRojo.png" alt="BCR" class="brand-logo-carousel" />
+          <img src="/public/imagenes/davivienda.png" alt="Davivienda" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoBNRojo.png" alt="BN" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoFifcoRojo.png" alt="Fifco" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoMegasuperRojo.png" alt="Mega Super" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoDosPinosRojo.png" alt="Dos Pinos" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoBPRojo.png" alt="BP" class="brand-logo-carousel" />
         </div>
       </div>
+
+      <div class="brands-carousel-wrapper2">
+        <div class="brands-carousel-track2">
+          <!-- Segunda fila -->
+          <img src="/public/imagenes/LogoIceRojo.png" alt="Ice" class="brand-logo-carousel" />
+          <img src="/public/imagenes/cocacolalogo.png" alt="Coca Cola" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogobcrRojo.png" alt="BCR" class="brand-logo-carousel" />
+          <img src="/public/imagenes/davivienda.png" alt="Davivienda" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoBNRojo.png" alt="BN" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoFifcoRojo.png" alt="Fifco" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoMegasuperRojo.png" alt="Mega Super" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoDosPinosRojo.png" alt="Dos Pinos" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoBPRojo.png" alt="BP" class="brand-logo-carousel" />
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -408,15 +397,15 @@
         <div class="galeria-track">
 
           <div class="galeria-slide galeria-slide--large">
-            <img src="imagenes/inicio1.png" alt="Proyecto 1">
+            <img src="/public/imagenes/inicio1.png" alt="Proyecto 1">
           </div>
 
           <div class="galeria-slide galeria-slide--large">
-            <img src="imagenes/inicio2.png" alt="Proyecto 2">
+            <img src="/public/imagenes/inicio2.png" alt="Proyecto 2">
           </div>
 
           <div class="galeria-slide galeria-slide--large">
-            <img src="imagenes/inicio3.png" alt="Proyecto 3">
+            <img src="/public/imagenes/inicio3.png" alt="Proyecto 3">
           </div>
 
         </div>
@@ -456,93 +445,15 @@
     </div>
   </section>
 
-  <!----------------------------------- Sección del FOOTER ----------------------------------->
-  <footer class="footer footer-fusion">
-    <div class="footer-main">
-      <div class="container footer-main-grid">
+  
+  <!-- Footer -->
+  <div id="footer"></div>
 
-        <div class="fm-col">
-          <div class="logo">
-          <img src="imagenes/logoMultiImagen.png" alt="Logo Multiimagen">
-        </div>
-          <p class="fm-text">
-            Publicidad empresarial y comercial. Soluciones en impresión, rotulación y
-            publicidad exterior con enfoque profesional.
-          </p>
-
-          <div class="fm-social-row">
-            <a class="fm-social" href="https://www.facebook.com/multimagencostarica" target="_blank" aria-label="Facebook">f</a>
-            <a class="fm-social" href="https://www.instagram.com/" target="_blank" aria-label="Instagram">◎</a>
-            <a class="fm-social" href="mailto:ventas@multimagencostarica.com" aria-label="Correo">✉</a>
-          </div>
-        </div>
-
-        <div class="fm-col">
-          <h4 class="fm-title">Info</h4>
-
-          <div class="ft-contact-cards ft-contact-cards--dark">
-            <div class="ft-mini">
-              <div class="ft-icon">☎</div>
-              <div>
-                <strong>Teléfono</strong>
-                <div class="ft-muted">(506) 2494-6967</div>
-              </div>
-            </div>
-
-            <div class="ft-mini">
-              <div class="ft-icon">✉</div>
-              <div>
-                <strong>Email</strong>
-                <div class="ft-muted">ventas@multimagencostarica.com</div>
-              </div>
-            </div>
-
-            <div class="ft-mini">
-              <div class="ft-icon">📍</div>
-              <div>
-                <strong>Dirección</strong>
-                <div class="ft-muted">3MPM+QC4, Bajo Los Golondrinas, Provincia de Alajuela, Grecia, Latino</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="fm-col">
-          <h4 class="fm-title">Contacto</h4>
-          <ul class="fm-info">
-            <li><span class="dot"></span> Email: ventas@multimagencostarica.com</li>
-            <li><span class="dot"></span> Tel: +506 2494-6967</li>
-            <li><span class="dot"></span> Horario: Lun–Vie 8:00AM–5:00PM</li>
-            <li><span class="dot"></span> Grecia, Costa Rica</li>
-          </ul>
-        </div>
-        <div class="fm-col fm-brand-image">
-        <img src="imagenes/LogoRamita.png" alt="Elemento decorativo Multiimagen">
-          </div>
-
-      </div>
-
-      <div class="footer-bottom">
-        <div class="container footer-bottom-row">
-          <small>© 2026 Multiimagen • Todos los derechos reservados.</small>
-          <small>Desarrollado por 
-            <a href="https://www.instagram.com/jaq_digital.cr/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="footer-link">
-            J&JdigitalCR
-            </a>
-          </small>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="funciones.js"></script>
+  <script src="../js/funciones.js"></script>
 
   <!-- Botón flotante de WhatsApp -->
   <a href="https://wa.me/50684214591" class="whatsapp-button" target="_blank" aria-label="Chatear por WhatsApp">
-    <img src="imagenes/whatsappIcono.png" alt="WhatsApp">
+    <img src="/public/imagenes/whatsappIcono.png" alt="WhatsApp">
   </a>
 
 </body>

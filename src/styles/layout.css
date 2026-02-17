@@ -1,0 +1,231 @@
+/* =========================
+   HEADER
+========================= */
+header{
+  position:sticky;
+  top:0;
+  left:0;
+  right:0;
+  z-index:999;
+  backdrop-filter: blur(22px);
+  background: rgba(253, 252, 252, 0.92);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  transition: transform .28s ease, opacity .28s ease;
+}
+
+.header.header-hide{
+  transform: translateY(-110%);
+  opacity: 0;
+}
+
+.header-content{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1.5rem 0;
+}
+
+.logo{ width:180px; }
+.logo img{ border-radius:0; } /*para que no se redondee por el img global */
+
+.nav{
+  display:flex;
+  gap:1.25rem;
+  font-size:.9rem;
+}
+
+.nav a{
+  text-decoration:none;
+  position:relative;
+  padding-bottom:2px;
+  font-weight:700;
+  color:#111;
+  transition: color .25s ease;
+}
+
+.nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:2px;
+  width:0;
+  background:var(--accent);
+  transition:width .25s ease;
+}
+
+.nav a:hover{
+  color:#b30000;
+}
+.nav a:hover::after{ width:100%; }
+
+
+/* =========================
+   FOOTER 
+========================= */
+.footer.footer-fusion{
+  padding:0 !important;
+  border-top:0 !important;
+  background:transparent !important;
+}
+
+.footer-fusion .footer-main{
+  background:
+    radial-gradient(circle at top left, rgba(255,0,0,.25), transparent 55%),
+    linear-gradient(180deg, #1a0000, #000);
+  padding:4rem 0 0;
+  border-top:1px solid rgb(54, 5, 5);
+}
+
+.footer-main-grid{
+  display:grid;
+  grid-template-columns:1.25fr 1fr 1fr;
+  gap:2.5rem;
+  align-items:start;
+}
+
+.fm-title{
+  margin:0 0 .9rem;
+  font-size:1.05rem;
+  letter-spacing:.02em;
+}
+
+.fm-text{
+  margin:0;
+  max-width:38ch;
+  line-height:1.6;
+  color:rgba(235,229,229,.9);
+  opacity:.92;
+}
+
+.fm-info{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:.75rem;
+}
+
+.fm-info li{
+  display:flex;
+  align-items:flex-start;
+  gap:.6rem;
+  line-height:1.5;
+  color:rgba(235,229,229,.88);
+  opacity:.92;
+}
+
+.fm-info .dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:var(--accent);
+  margin-top:.45rem;
+  flex:0 0 8px;
+}
+
+.fm-social-row{
+  display:flex;
+  gap:.6rem;
+  margin-top:1rem;
+}
+.fm-social{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  color:#fff;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,0,0,.22);
+  transition:transform .2s ease, background .2s ease;
+}
+.fm-social:hover{
+  transform:translateY(-2px);
+  background:rgba(255,0,0,.25);
+}
+
+/* tarjetas dark dentro del footer */
+.ft-contact-cards{
+  display:grid;
+  gap:.9rem;
+  margin-top:.9rem;
+}
+.ft-mini{
+  display:flex;
+  align-items:center;
+  gap:.85rem;
+  padding:1rem;
+  border-radius:16px;
+}
+.ft-icon{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+}
+.ft-muted{ font-size:.92rem; }
+
+.ft-contact-cards--dark .ft-mini{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,0,0,.22);
+}
+.ft-contact-cards--dark .ft-icon{
+  background:rgba(255,0,0,.18);
+  color:#fff;
+}
+.ft-contact-cards--dark .ft-muted{ color:rgba(235,229,229,.85); }
+.ft-contact-cards--dark strong{ color:#fff; }
+
+.footer-bottom{
+  margin-top:3rem;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:1.1rem 0;
+}
+.footer-bottom-row{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  opacity:.85;
+  font-size:.9rem;
+}
+
+.footer-bottom-row .footer-link{
+  color:rgba(235,229,229,.9);
+  text-decoration:none;
+  font-weight:600;
+  transition: color .25s ease, text-shadow .25s ease;
+}
+.footer-bottom-row .footer-link:hover{
+  color:#ff0000;
+  text-shadow:0 0 8px rgba(255,0,0,.6);
+}
+
+/* Footer con 4 columnas */
+.footer-main-grid{
+  display:grid;
+  grid-template-columns: 1.25fr 1fr 1fr 320px; /*  última columna para la imagen */
+  gap:2.5rem;
+  align-items:center; /* centra verticalmente */
+}
+
+/* Columna de la imagen */
+.fm-brand-image{
+  display:flex;
+  justify-content:flex-end; /* la pega a la derecha */
+  align-items:center;
+}
+
+.fm-brand-image img{
+  width:min(320px, 100%);
+  height:auto;
+  border-radius:18px;         
+  opacity:.95;
+  object-fit:contain;
+  filter: drop-shadow(0 18px 35px rgba(255,0,0,.25));
+}
+
