@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================
   // HEADER / FOOTER (COMPONENTES)
   // ==========================
+
+  
   function loadComponent(selector, filePath) {
     fetch(filePath)
       .then((response) => {
@@ -16,6 +18,28 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch((error) => console.error("Error cargando componente:", filePath, error));
   }
+
+  // ==========================
+  // SMOOTH SCROLL NAV (HEADER)
+  // ==========================
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const id = link.getAttribute("href");
+    if (!id || id.length < 2) return;
+
+    const target = document.querySelector(id);
+    if (!target) return;
+
+    e.preventDefault();
+
+    // scroll suave
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // opcional: actualizar URL sin salto
+    history.pushState(null, "", id);
+  });
 
   loadComponent("#header", "../components/Header.html");
   loadComponent("#footer", "../components/Footer.html");
@@ -337,7 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const imgs = Array.from(brandsTrack.querySelectorAll("img"));
 
-    // ✅ Bloquear drag/selección de imágenes (evita “arrastrar para copiar”)
+    // Bloquear drag/selección de imágenes 
     imgs.forEach((img) => {
       img.setAttribute("draggable", "false");
       img.style.userSelect = "none";
@@ -476,11 +500,11 @@ if (brandsWrapper2 && brandsTrack2) {
     { passive: true }
   );
 
-  console.log("✅ Carrusel fila 2 con arrastre activado");
+  console.log(" Carrusel fila 2 con arrastre activado");
 }
 
 
-  // ✅ CAMBIO DE COLOR EN LOGOS (hover) - UNA SOLA VEZ, ROBUSTO
+  //  CAMBIO DE COLOR EN LOGOS (hover) 
   document.querySelectorAll(".brand-logo-carousel").forEach((logo) => {
     const src = logo.getAttribute("src");
     if (!src) return;
@@ -560,3 +584,33 @@ if (brandsWrapper2 && brandsTrack2) {
     });
   })();
 });
+
+// ==========================
+// REVEAL ON SCROLL (LAZY ANIM)
+// ==========================
+function initRevealOnScroll() {
+  // Agarra secciones y bloques típicos
+  const candidates = document.querySelectorAll(`
+    section,
+    .contact-grid > *,
+    .galeria-slide,
+    .galeria-slider,
+    .galeria-viewport,
+    .galeria-track
+  `);
+
+  candidates.forEach(el => el.classList.add("reveal"));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        io.unobserve(entry.target); // una vez y listo (más liviano)
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+}
+
+initRevealOnScroll();
