@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
     history.pushState(null, "", id);
   });
 
-  loadComponent("#header", "../components/Header.html");
-  loadComponent("#footer", "../components/Footer.html");
+  loadComponent("#header", "/src/components/Header.html");
+  loadComponent("#footer", "/src/components/Footer.html");
 
   /* ==========================
      0. GOOGLE FORM EMBEBIDO
