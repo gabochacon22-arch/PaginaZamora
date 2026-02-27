@@ -476,7 +476,43 @@ img{
   background-position:center;
   background-repeat:no-repeat;
 }
+/* ===== Carrusel suave para galerías (Servicios) ===== */
+.galeria-viewport{
+  overflow: hidden;
+  width: 100%;
+  margin-top: 14px;
+}
 
+.galeria-track{
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: galeriaAuto 28s linear infinite;
+}
+
+/* imágenes dentro del carrusel */
+.galeria-track img{
+  height: 230px;
+  width: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* si hay texto dentro del track (como <p>), se verá raro porque se moverá.
+   Puede ocultarlo o sacarlo fuera (le explico abajo). */
+
+@keyframes galeriaAuto{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+
+.galeria-viewport:hover .galeria-track{
+  animation-play-state: paused;
+}
+/* Cursor para drag */
+.galeria-viewport { cursor: grab; }
+.galeria-viewport.is-dragging { cursor: grabbing; }
 /* =========================
    SOBRE NOSOTROS
 ========================= */

@@ -614,3 +614,125 @@ function initRevealOnScroll() {
 }
 
 initRevealOnScroll();
+
+// Carrusel automático: duplica imágenes dentro de cada galeria-track
+document.querySelectorAll(".galeria-track").forEach(track => {
+  const imgs = Array.from(track.querySelectorAll("img"));
+  if (imgs.length < 2) return;
+
+  // Evitar duplicar dos veces si ya se ejecutó
+  if (track.dataset.loopReady === "1") return;
+  track.dataset.loopReady = "1";
+
+  imgs.forEach(img => {
+    const clone = img.cloneNode(true);
+    clone.setAttribute("draggable", "false");
+    clone.style.userSelect = "none";
+    clone.style.webkitUserDrag = "none";
+    track.appendChild(clone);
+  });
+});
+// Drag + pausa para galerías (mouse + touch)
+document.querySelectorAll(".galeria-viewport").forEach((viewport) => {
+  const track = viewport.querySelector(".galeria-track");
+  if (!track) return;
+
+  let isDown = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let resumeTimer = null;
+
+  // Convertimos el viewport en scroll horizontal real
+  viewport.style.overflowX = "auto";
+  viewport.style.scrollBehavior = "auto";
+  viewport.style.webkitOverflowScrolling = "touch";
+
+  // Ocultar scrollbar (opcional, si ya lo tiene en CSS, ignore)
+  viewport.style.scrollbarWidth = "none"; // Firefox
+  viewport.style.msOverflowStyle = "none"; // IE/Edge viejo
+  viewport.addEventListener("scroll", () => {
+    // nada, solo evita warnings en algunos navegadores
+  });
+
+  // Evitar drag/selección de imágenes
+  track.querySelectorAll("img").forEach((img) => {
+    img.setAttribute("draggable", "false");
+    img.style.userSelect = "none";
+    img.style.webkitUserDrag = "none";
+    img.addEventListener("dragstart", (e) => e.preventDefault());
+  });
+
+  const pause = () => {
+    track.style.animationPlayState = "paused";
+    if (resumeTimer) clearTimeout(resumeTimer);
+  };
+
+  const resumeLater = () => {
+    if (resumeTimer) clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      track.style.animationPlayState = "running";
+    }, 1700);
+  };
+
+  const pageX = (e) => (e.touches ? e.touches[0].pageX : e.pageX);
+
+  // Mouse
+  viewport.addEventListener("mousedown", (e) => {
+    isDown = true;
+    viewport.classList.add("is-dragging");
+    pause();
+    startX = pageX(e) - viewport.getBoundingClientRect().left;
+    startScrollLeft = viewport.scrollLeft;
+  });
+
+  viewport.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = pageX(e) - viewport.getBoundingClientRect().left;
+    const walk = x - startX;
+    viewport.scrollLeft = startScrollLeft - walk;
+  });
+
+  const stopMouse = () => {
+    if (!isDown) return;
+    isDown = false;
+    viewport.classList.remove("is-dragging");
+    resumeLater();
+  };
+
+  viewport.addEventListener("mouseup", stopMouse);
+  viewport.addEventListener("mouseleave", stopMouse);
+  document.addEventListener("mouseup", stopMouse);
+
+  // Touch
+  viewport.addEventListener(
+    "touchstart",
+    (e) => {
+      isDown = true;
+      pause();
+      startX = pageX(e) - viewport.getBoundingClientRect().left;
+      startScrollLeft = viewport.scrollLeft;
+    },
+    { passive: true }
+  );
+
+  viewport.addEventListener(
+    "touchmove",
+    (e) => {
+      if (!isDown) return;
+      const x = pageX(e) - viewport.getBoundingClientRect().left;
+      const walk = x - startX;
+      viewport.scrollLeft = startScrollLeft - walk;
+    },
+    { passive: true }
+  );
+
+  viewport.addEventListener(
+    "touchend",
+    () => {
+      isDown = false;
+      resumeLater();
+    },
+    { passive: true }
+  );
+});
