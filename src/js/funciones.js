@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ==========================
-     4. HEADER HIDE/SHOWs
+     4. HEADER HIDE/SHOW
   ========================== */
   const header = document.querySelector(".header");
   let lastY = window.scrollY;
