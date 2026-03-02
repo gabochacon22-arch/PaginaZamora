@@ -1,0 +1,509 @@
+
+/* =========================
+   SOBRE NOSOTROS
+========================= */
+.section-diagonal{
+  padding:5rem 0 4rem;
+  background:#fff;
+  color:#0f172a;
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+  gap:3rem;
+  align-items:center;
+}
+
+.about-image img{
+  border-radius:24px;
+  box-shadow:0 24px 60px rgba(15,23,42,.35);
+}
+
+.about-text h2{
+  font-size:2rem;
+  margin-bottom:1rem;
+  color:#0f172a;
+}
+
+.about-text p{
+  color:#4b5563;
+  margin-bottom:1.5rem;
+  line-height:1.6;
+}
+
+.about-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2.5rem;
+  margin-bottom:1.7rem;
+}
+
+.stat-number{
+  display:block;
+  font-size:1.6rem;
+  font-weight:700;
+  color:#b91c1c;
+}
+
+.stat-label{
+  font-size:.9rem;
+  color:#6b7280;
+}
+
+/* =========================
+   MARCAS
+========================= */
+.section-brands{
+  background:#fff;
+  color:#0f172a;
+  padding:4rem 0 5rem;
+  overflow:hidden;
+}
+
+.brands-title{
+  text-align:center;
+  font-size:2.2rem;
+  font-weight:400;
+  letter-spacing:.03em;
+  margin:0 0 3rem;
+}
+
+.brands-carousel-wrapper,
+.brands-carousel-wrapper2{
+  width:100%;
+  overflow:hidden;          /* clave */
+  position:relative;
+  cursor:grab;
+  user-select:none;
+  -webkit-overflow-scrolling:touch;
+}
+.brands-carousel-wrapper.is-dragging,
+.brands-carousel-wrapper2.is-dragging{
+  cursor:grabbing;
+}
+
+.brands-carousel-wrapper.is-dragging{
+  cursor:grabbing;
+  scroll-behavior:auto;
+}
+.brands-carousel-wrapper.is-dragging .brands-carousel-track{ pointer-events:none; }
+
+.brands-carousel-track,
+.brands-carousel-track2{
+  display:flex;
+  width:fit-content;
+  align-items:center;
+  will-change: transform;
+}
+
+/* Mantenga sus gaps como están */
+.brands-carousel-track{ gap:3rem; }
+.brands-carousel-track2{ gap:4rem; }
+
+.brand-logo-carousel{
+  height:200px;
+  width:140px;   
+  display:block;
+  object-fit:contain;
+  filter:grayscale(30%);
+  opacity:.9;
+  transition:transform .3s ease, filter .3s ease, opacity .3s ease;
+  flex:0 0 auto;        
+}
+.brand-logo-carousel:hover{
+  transform:scale(1.2);
+  filter:grayscale(0%);
+  opacity:1;
+}
+
+.brands-carousel-track,
+.brands-carousel-track2{
+  align-items:center;
+}
+
+
+
+/* =========================
+   PROYECTOS (GALERÍA FULL WIDTH)
+========================= */
+.section-galeria{
+  width:100vw;
+  position:relative;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  padding:0;
+  background:transparent;
+  overflow:hidden;
+}
+
+.section-galeria::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background-image: var(--banner-image, none);
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  filter: blur(8px) saturate(.95);
+  transform:scale(1.03);
+  opacity:.95;
+  pointer-events:none;
+  transition:background-image .6s ease, opacity .6s ease;
+}
+
+.section-galeria::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background: linear-gradient(rgba(255,255,255,.02), rgba(0,0,0,.08));
+  pointer-events:none;
+}
+
+.section-galeria .galeria-slider,
+.section-galeria .galeria-viewport,
+.section-galeria .galeria-track,
+.section-galeria .galeria-slide{
+  position:relative;
+  z-index:3;
+}
+
+.galeria-viewport{
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  cursor:grab;
+  width:100vw;
+  margin-left:calc(-50vw + 50%);
+  scrollbar-width:none;
+}
+.galeria-viewport::-webkit-scrollbar{ display:none; }
+.galeria-viewport.dragging{
+  cursor:grabbing;
+  scroll-behavior:auto;
+}
+
+.galeria-track{
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+}
+
+.galeria-slide{
+  flex:0 0 calc(100% / 3);
+  scroll-snap-align:start;
+}
+
+.galeria-slide img{
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  border-radius:0;
+  max-height:380px;
+}
+
+.galeria-slide.galeria-slide--large{
+  flex:0 0 62vw !important;
+}
+.galeria-slide.galeria-slide--large img{
+  height:600px;
+}
+
+/* =========================
+   CONTACTO
+========================= */
+.section-contacto{
+  background: linear-gradient(135deg,#f8f9fa 0%, #ffffff 100%);
+  padding:4rem 0;
+}
+
+.section-contacto .contact-grid{
+  display:grid;
+  grid-template-columns:1fr 520px;
+  gap:2.5rem;
+  align-items:start;
+}
+
+.section-contacto .contact-info{ padding:.5rem 1rem; }
+
+.contacto-title{
+  text-align:center;
+  color:#020617;
+  margin-bottom:.5rem;
+  font-size:2.5rem;
+}
+
+.contacto-subtitle{
+  text-align:center;
+  color:#555;
+  margin-bottom:2.5rem;
+  font-size:1rem;
+}
+
+.google-form-container{
+  background:#fff;
+  border-radius:12px;
+  padding:.8rem;
+  box-shadow:0 8px 30px rgba(0,0,0,.06);
+  border:1px solid #f50000;
+  overflow:hidden;
+}
+
+.google-form-container iframe{
+  width:100%;
+  height:580px;
+  border:none;
+  display:block;
+  border-radius:2px;
+}
+
+/* ===== Slider de PROYECTOS (#proyectos): translateX, NO scroll ===== */
+#proyectos .galeria-viewport {
+  overflow: hidden;
+}
+
+#proyectos .galeria-track {
+  will-change: transform;
+}
+
+/* Fondo dinámico (si su sección lo usa) */
+.section-galeria {
+  background-image: var(--banner-image);
+  background-size: cover;
+  background-position: center;
+}
+/* =========================
+   FORM CONTACTO (Chatty rojo/blanco/negro) - LIMPIO
+========================= */
+
+:root{
+  --brand-red: #f50000;
+  --brand-red-2: #b91c1c;
+  --ink: #0f172a;
+  --card-bg: rgba(255,255,255,.55);  
+  --field-bg: rgba(255,255,255,.92);
+  --border: rgba(15,23,42,.18);
+  --shadow: 0 18px 50px rgba(0,0,0,.12);
+}
+
+/* Card */
+.contact-card--form.chatty-card{
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid rgba(245,0,0,.35);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  isolation: isolate;
+}
+
+/* Asegura que el contenido vaya arriba */
+.contact-card--form.chatty-card > *:not(.chatty-frame){
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== Marco animado MÁS visible ===== */
+.chatty-frame{
+  position: absolute;
+  inset: -4px;              /* más grande para glow */
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.chatty-frame::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: 20px;
+
+  /* más “vivo” y con más contraste */
+  background: conic-gradient(
+    from 0deg,
+    rgba(245,0,0,0),
+    rgba(245,0,0,.95),
+    rgba(0,0,0,.65),
+    rgba(245,0,0,.95),
+    rgba(245,0,0,0)
+  );
+
+  filter: blur(14px);
+  opacity: .95;
+  animation: chattySpin 4.2s linear infinite;
+}
+
+.chatty-frame::after{
+  content:"";
+  position:absolute;
+  inset: 4px;
+
+  /* “luces” internas (tipo imagen) para que se note sin ser exagerado */
+  background:
+    radial-gradient(circle at 12% 10%, rgba(245,0,0,.18), transparent 52%),
+    radial-gradient(circle at 88% 22%, rgba(0,0,0,.10), transparent 52%),
+    radial-gradient(circle at 35% 95%, rgba(245,0,0,.10), transparent 55%),
+    rgba(255,255,255,.92);
+
+  border: 1px solid rgba(15,23,42,.08);
+}
+
+@keyframes chattySpin{
+  to { transform: rotate(360deg); }
+}
+
+/* Títulos */
+.chatty-title{
+  margin: 4px 0 2px;
+  color: var(--ink);
+  background: transparent;
+}
+.chatty-sub{
+  margin: 0 0 14px;
+  color: rgba(15,23,42,.72);
+}
+
+/* Form layout */
+.chatty-form{
+  display: grid;
+  gap: 18px;
+}
+
+.row-2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 900px){
+  .row-2{ grid-template-columns: 1fr; }
+}
+
+/* Form groups */
+.form-group{
+  display: grid;
+  gap: 8px;
+}
+
+.form-group label{
+  font-size: .95rem;
+  line-height: 1.25;
+  color: rgba(15,23,42,.92);
+  font-weight: 600;
+}
+
+/* Inputs */
+.form-group input,
+.form-group textarea{
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(148,0,0,.55); /* su rojo sobrio */
+  background: var(--field-bg);
+  padding: 12px 12px;
+  color: rgba(15,23,42,.96);
+  outline: none;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.form-group textarea{
+  resize: vertical;
+  min-height: 150px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+  border-color: rgba(245,0,0,.85);
+  box-shadow: 0 0 0 4px rgba(245,0,0,.16);
+  transform: translateY(-1px);
+}
+
+/* Checkbox */
+.form-legal{
+  margin-top: 2px;
+}
+
+.check{
+  display:flex;
+  gap: 10px;
+  align-items:flex-start;
+}
+
+.check input{
+  margin-top: 4px;
+  accent-color: var(--brand-red);
+}
+
+.check span{
+  line-height: 1.35;
+  color: rgba(15,23,42,.92);
+  opacity: 1;
+}
+
+/* Acciones */
+.form-actions{
+  margin-top: 2px;
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Botón (si usted usa .btn-primary) */
+.btn-primary{
+  border-radius: 12px;
+  padding: 12px 16px;
+  border: 1px solid rgba(0,0,0,.15);
+  background: linear-gradient(180deg, rgba(245,0,0,.98), rgba(185,28,28,.92));
+  color:#fff;
+  cursor:pointer;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.btn-primary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 16px 34px rgba(0,0,0,.18);
+  filter: saturate(1.05);
+}
+.btn-primary:active{
+  transform: translateY(0px) scale(.99);
+}
+
+/* Status */
+.form-status{ font-size: .95rem; }
+.form-status.success{ color: #0f766e; }
+.form-status.error{ color: var(--brand-red-2); }
+
+/* Honeypot invisible */
+.hp{
+  position:absolute !important;
+  left:-9999px !important;
+  width:1px !important;
+  height:1px !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+
+/* Quitar la franja blanca del título/subtítulo */
+.contact-card--form.chatty-card .chatty-head,
+.contact-card--form.chatty-card header{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* Si esa franja existe por padding/margen extra, lo suaviza */
+.contact-card--form.chatty-card .chatty-head{
+  padding: 0 !important;
+  margin: 0 0 14px !important;
+}
+
+/* Por si el h2/p tiene “fondo” individual */
+.contact-card--form.chatty-card .chatty-title,
+.contact-card--form.chatty-card .chatty-sub{
+  background: transparent !important;
+}

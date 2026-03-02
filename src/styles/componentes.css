@@ -1,0 +1,79 @@
+/* =========================
+   BOTONES
+========================= */
+.btn{
+  border-radius:999px;
+  border:1px solid transparent;
+  font-size:.9rem;
+  padding:.55rem 1.4rem;
+  cursor:pointer;
+  transition:all .2s ease;
+  font-weight:500;
+}
+
+.btn-primary{
+  background: linear-gradient(135deg, var(--accent), #580919);
+  color:#fff;
+  box-shadow:0 12px 30px rgba(235,3,3,.5);
+}
+.btn-primary:hover{
+  transform:translateY(-1px) scale(1.01);
+  box-shadow:0 16px 40px rgba(255,255,255,.6);
+}
+
+.btn-outline{
+  background:transparent;
+  border-color:#000;
+  color:#030202;
+}
+.btn-outline:hover{
+  background:#070606;
+  border-color:#020101;
+  color:var(--accent);
+}
+
+.btn-ghost{
+  background:transparent;
+  color:var(--text-muted);
+}
+.btn-ghost:hover{
+  color:var(--text-main);
+  background:rgba(148,163,184,.08);
+}
+
+
+/* =========================
+   WHATSAPP FLOAT
+========================= */
+.whatsapp-button{
+  position:fixed;
+  bottom:22px;
+  right:22px;
+  width:62px;
+  height:62px;
+  background:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 6px 25px rgba(0,0,0,.25);
+  z-index:999;
+  transition:transform .25s ease, box-shadow .25s ease;
+  animation:glow 2s infinite ease-in-out;
+}
+
+.whatsapp-button img{
+  width:90px;
+  height:66px;
+}
+
+.whatsapp-button:hover{
+  transform:scale(1.12);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+@keyframes glow{
+  0%{ box-shadow:0 0 0px rgba(0,92,34,.4); }
+  50%{ box-shadow:0 0 18px rgba(37,211,102,.9); }
+  100%{ box-shadow:0 0 0px rgba(255,2,2,.4); }
+}

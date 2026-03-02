@@ -5,6 +5,9 @@
   <link rel="icon" type="image/png" href="/public/imagenes/LogoRamita.png">
   <link rel="stylesheet" href="src/styles/home.css">
   <link rel="stylesheet" href="src/styles/layout.css">
+  <link rel="stylesheet" href="src/styles/servicios.css">
+  <link rel="stylesheet" href="src/styles/contacto&proyectos.css">
+  <link rel="stylesheet" href="src/styles/componentes.css">
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +15,19 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
-
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    object-src 'none';
+    form-action 'self';
+    frame-ancestors 'self';
+    img-src 'self' data: https:;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com;
+    frame-src https://challenges.cloudflare.com;
+    connect-src 'self' https://challenges.cloudflare.com;
+  ">
 </head>
 
 <body>
@@ -50,7 +65,6 @@
       </p>
 
       <div class="hero-actions hero-actions-center">
-        <button class="btn btn-primary">Contáctenos</button>
       </div>
     </div>
   </section>
@@ -69,7 +83,6 @@
       </p>
 
       <div class="cta-actions">
-      <a class="btn btn-outline cta-btn" href="#contacto">Agendar una reunión</a>
       <a class="btn btn-outline cta-btn" href="#contacto">Ver contacto</a>
       </div>
     </div>
@@ -169,12 +182,12 @@
       <div class="galeria-servicio" id="galeria-luminosos">
   <h3>Rótulos luminosos</h3>
 
- <p>
-       Ofrecemos productos de gran calidad y excelente exposición, construidos en una
+    <p>
+      Ofrecemos productos de gran calidad y excelente exposición, construidos en una
       amplia gama de materiales como aluminio, acero e hierro. También ofrecemos diversos sustratos a elegir,
-     como lona, acrílico y policarbonato, con rotulaciones digitales de alta calidad o vinilo de corte.
-     Además, los productos pueden ser iluminados con fluorescentes, LEDs o neón.
-     </p>
+      como lona, acrílico y policarbonato, con rotulaciones digitales de alta calidad o vinilo de corte.
+      Además, los productos pueden ser iluminados con fluorescentes, LEDs o neón.
+    </p>
 
   <div class="galeria-viewport">
     <div class="galeria-track">
@@ -204,18 +217,7 @@
             </button>
           </div>
 
-          <div class="vehicular-slider">
-            <div class="vehicular-viewport">
-              <div class="vehicular-track">
-                <div class="vehicular-item" style="background-image:url('imagenes/RotVeh1.jpeg')"></div>
-                <div class="vehicular-item" style="background-image:url('imagenes/RotVeh2.jpeg')"></div>
-                <div class="vehicular-item" style="background-image:url('imagenes/RotVeh3.jpeg')"></div>
-                <div class="vehicular-item" style="background-image:url('imagenes/RotVeh4.jpeg')"></div>
-                <div class="vehicular-item" style="background-image:url('imagenes/RotVeh5.jpeg')"></div>
-                <div class="vehicular-item" style="background-image:url('imagenes/RotVeh6.jpeg')"></div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
 
@@ -413,16 +415,17 @@
 
       <div class="brands-carousel-wrapper2">
         <div class="brands-carousel-track2">
-          <!-- Segunda fila -->
-          <img src="/public/imagenes/LogoImperialRojo.png" alt="Imperial" class="brand-logo-carousel" />
-          <img src="/public/imagenes/.png" alt="Coca Cola" class="brand-logo-carousel" />
-          <img src="/public/imagenes/LogoTropicalRojo.png" alt="Tropical" class="brand-logo-carousel" />
-          <img src="/public/imagenes/LogoHeinekenRojo.png" alt="Heineken" class="brand-logo-carousel" />
-          <img src="/public/imagenes/LogoIceRojo.png" alt="Ice" class="brand-logo-carousel" />
-          <img src="/public/imagenes/LogoPepsiRojo.png" alt="Pepsi" class="brand-logo-carousel" />
-          <img src="/public/imagenes/LogoKolbiRojo.png" alt="Kolbi" class="brand-logo-carousel" />
-          <img src="/public/imagenes/.png" alt="Dos Pinos" class="brand-logo-carousel" />
-          <img src="/public/imagenes/.png" alt="BP" class="brand-logo-carousel" />
+          <img src="/public/imagenes/LogoImperialRojo.png" data-hover="/public/imagenes/LogoImperial.png" alt="Imperial" class="brand-logo-carousel" />
+
+          <img src="/public/imagenes/LogoTropicalRojo.png" data-hover="/public/imagenes/LogoTropical.png" alt="Tropical" class="brand-logo-carousel" />
+
+          <img src="/public/imagenes/LogoHeinekenRojo.png" data-hover="/public/imagenes/LogoHeineken.png" alt="Heineken" class="brand-logo-carousel" />
+
+          <img src="/public/imagenes/LogoIceRojo.png" data-hover="/public/imagenes/LogoIce.png" alt="Ice" class="brand-logo-carousel" />
+
+          <img src="/public/imagenes/LogoPepsiRojo.png" data-hover="/public/imagenes/LogoPepsi.png" alt="Pepsi" class="brand-logo-carousel" />
+
+          <img src="/public/imagenes/LogoKolbiRojo.png" data-hover="/public/imagenes/LogoKolbi.png" alt="Kolbi" class="brand-logo-carousel" />
         </div>
       </div>
 
@@ -461,7 +464,7 @@
           <p class="contacto-subtitle">Contactanos por nuestras redes sociales! O bien llenando el formulario.</p>
 
           <div style="margin-top:1.25rem;">
-            <div class="social-buttons">
+              <div class="cta-actions">
               <a class="btn btn-primary" href="https://wa.me/50684214591" target="_blank">WhatsApp</a>
               <a class="btn btn-primary" href="https://www.facebook.com/multimagencostarica" target="_blank">Facebook</a>
               <a class="btn btn-primary" href="https://www.instagram.com/" target="_blank">Instagram</a>
@@ -475,11 +478,81 @@
           </div>
         </div>
 
-        <div class="google-form-container">
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSfxHA7jnoKZVJAMuxj5wqaJ0-TyBy3tr0B6PqKhxLBvZC12PQ/viewform?embedded=true"
-            width="100%" height="880" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
-        </div>
+        <section class="contact-card contact-card--form chatty-card">
+          <div class="chatty-frame" aria-hidden="true"></div>
+
+          <header class="chatty-head">
+            <h2 class="chatty-title">Envíenos su consulta</h2>
+            <p class="chatty-sub muted">Campos con * son obligatorios.</p>
+          </header>
+
+          <form id="contactForm" class="chatty-form" data-endpoint="/api/contact" novalidate>
+            <!-- Honeypot -->
+            <input type="text" name="website" class="hp" autocomplete="off" tabindex="-1" aria-hidden="true" />
+            <input type="hidden" name="formLoadedAt" id="formLoadedAt" />
+
+            <div class="row-2">
+              <div class="form-group">
+                <label for="nombre">Nombre *</label>
+                <input id="nombre" type="text" name="nombre" required />
+                <small class="error-msg"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="apellidos">Apellidos *</label>
+                <input id="apellidos" type="text" name="apellidos" required />
+                <small class="error-msg"></small>
+              </div>
+            </div>
+
+            <div class="row-2">
+              <div class="form-group">
+                <label for="correo">Correo *</label>
+                <input id="correo" type="email" name="correo" required />
+                <small class="error-msg"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="phoneInput">Número de teléfono</label>
+                <input id="phoneInput" type="tel" placeholder="8888 8888" />
+                <input type="hidden" name="telefono" id="telefono" />
+                <small class="error-msg" id="phoneError"></small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="empresa">Empresa *</label>
+              <input id="empresa" type="text" name="empresa" required />
+              <small class="error-msg"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="mensaje">Mensaje o comentario *</label>
+              <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
+              <small class="error-msg"></small>
+            </div>
+
+            <div class="form-legal">
+              <label class="check">
+                <input type="checkbox" name="consentimiento" required />
+                <span>Estoy de acuerdo con la Política de Privacidad y acepto los términos.</span>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Enviar</button>
+              <div id="formStatus" class="form-status" aria-live="polite"></div>
+            </div>
+
+            <!-- Turnstile: SOLO UNO -->
+            <div class="ts-wrap">
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAAChkG_l0C_1r5Z2Y"></div>
+            </div>
+          </form>
+
+          <!-- Script de Turnstile: FUERA del form -->
+          <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+        </section>
       </div>
     </div>
   </section>
@@ -488,7 +561,13 @@
   <!-- Footer -->
   <div id="footer"></div>
 
-  <script src="src/js/funciones.js"></script>
+  <script defer src="src/js/brands-carousel.js"></script>
+  <script defer src="src/js/contact-form.js"></script>
+  <script defer src="src/js/head&foot.js"></script>
+  <script defer src="src/js/reveal.js"></script>            
+  <script defer src="src/js/slider-proyectos.js"></script>
+  <script defer src="src/js/slider-servicios.js"></script>
+
   <!-- Botón flotante de WhatsApp -->
   <a href="https://wa.me/50684214591" class="whatsapp-button" target="_blank" aria-label="Chatear por WhatsApp">
     <img src="/public/imagenes/whatsappIcono.png" alt="WhatsApp">

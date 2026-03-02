@@ -1,7 +1,8 @@
+/* ESTA SECCION ES DEL HEADER Y EL FOOTER*/
+
 /* =========================
    HEADER
 ========================= */
-
 html{
   scroll-behavior: smooth;
   scroll-padding-top: 110px; /* ajuste según el alto real del header */
@@ -257,7 +258,8 @@ header{
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
   .reveal{ transition: none; transform: none; filter: none; opacity: 1; }
-}/* =========================
+}
+/* =========================
    REVEAL ON SCROLL
 ========================= */
 .reveal{

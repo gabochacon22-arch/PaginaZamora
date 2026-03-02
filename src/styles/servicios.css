@@ -1,0 +1,292 @@
+
+/* =========================
+   SERVICIOS
+========================= */
+#servicios{
+  position:relative;
+  padding:3.5rem 0;
+  background-image:
+    linear-gradient(rgba(120,0,0,.75), rgba(80,0,0,.85), rgba(60,0,0,.92)),
+    url("imagenes/fondoPagina.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+#servicios .section-header{
+  transition:opacity .6s ease, transform .6s ease, filter .6s ease;
+}
+#servicios .section-header.oculta{
+  opacity:0;
+  transform:translateY(-15px) scale(1.02);
+  filter:blur(4px);
+}
+#servicios .section-header.escondida{ display:none; }
+
+.cards-grid{
+  display:grid;
+  gap:1.5rem;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  transition:opacity .6s ease, transform .6s ease, filter .6s ease;
+}
+.cards-grid.oculta{
+  opacity:0;
+  transform:translateY(-25px) scale(1.05);
+  filter:blur(6px);
+}
+.cards-grid.escondida{ display:none; }
+
+.card{
+  border-radius:var(--radius-lg);
+  padding:1.4rem 1.3rem 1.3rem;
+  border:1px solid var(--border-soft);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+}
+
+.card h3{
+  font-size:1.1rem;
+  margin-bottom:.6rem;
+}
+
+.card-btn{
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.6);
+  padding:.35rem .9rem;
+  background:rgba(39,18,16,.85);
+  color:var(--text-main);
+  font-size:.78rem;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--accent);
+  box-shadow:0 30px 80px rgba(182,178,176,.85);
+}
+
+/* Variantes */
+.card-roja,
+.card-blanca{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  transition: background .4s ease, color .4s ease;
+}
+
+.card-roja{
+  background: radial-gradient(circle at top left, rgba(220,38,38,.95), #7f1d1d);
+  color:#fff;
+}
+.card-roja:hover{
+  background:#fff !important;
+  color:#8b0c0c;
+}
+.card-roja:hover h3,
+.card-roja:hover p{ color:#8b0c0c; }
+
+.card-blanca{
+  background:#fff;
+  color:#8b0c0c;
+}
+.card-blanca p{ color:#513737; transition:color .4s ease; }
+.card-blanca:hover{
+  background: radial-gradient(circle at top left, rgba(220,38,38,.95), #7f1d1d) !important;
+  color:#fff;
+}
+.card-blanca:hover h3,
+.card-blanca:hover p{ color:#fff; }
+
+.card-roja img,
+.card-blanca img{
+  width:100%;
+  margin-bottom:.75rem;
+}
+
+.card-roja .card-btn{
+  background:#fff;
+  color:var(--accent);
+  border:1px solid rgba(255,255,255,.35);
+  margin-top:.75rem;
+}
+.card-roja:hover .card-btn,
+.card-roja .card-btn:hover{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+
+.card-blanca .card-btn{
+  background:var(--accent);
+  color:#fff;
+  border:1px solid var(--accent);
+  margin-top:.75rem;
+}
+.card-blanca:hover .card-btn,
+.card-blanca .card-btn:hover{
+  background:#fff;
+  color:var(--accent);
+  border-color:var(--accent);
+}
+
+/* =========================
+   GALERÍAS POR SERVICIO
+========================= */
+.galeria-servicio{
+  display:none;
+  margin-top:1.2rem;
+  opacity:0;
+  transform:translateY(14px) scale(.98);
+  transition:opacity .6s ease, transform .6s ease;
+}
+
+.galeria-servicio.activa{
+  display:block;
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+.galeria-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+  gap:1rem;
+  margin-bottom:1.5rem;
+}
+
+.galeria-grid img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+}
+
+#galeria-vehicular .galeria-grid{
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+}
+#galeria-vehicular .vehicular-texto{ max-width:920px; }
+#galeria-vehicular .vehicular-slider{ width:100%; }
+
+#galeria-vehicular .vehicular-viewport{
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  border-radius:28px;
+}
+#galeria-vehicular .vehicular-viewport::-webkit-scrollbar{ display:none; }
+
+#galeria-vehicular .vehicular-track{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:calc((100% - 1.2rem) / 2);
+  gap:1.2rem;
+  padding:.5rem;
+}
+
+#galeria-vehicular .vehicular-item{
+  scroll-snap-align:start;
+  height:520px;
+  border-radius:28px;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+/* ===== Carrusel suave para galerías (Servicios) ===== */
+.galeria-viewport{
+  overflow: hidden;
+  width: 100%;
+  margin-top: 14px;
+}
+
+.galeria-track{
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: galeriaAuto 28s linear infinite;
+}
+
+/* imágenes dentro del carrusel */
+.galeria-track img{
+  height: 230px;
+  width: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* si hay texto dentro del track (como <p>), se verá raro porque se moverá.
+   Puede ocultarlo o sacarlo fuera (le explico abajo). */
+
+@keyframes galeriaAuto{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+
+.galeria-viewport:hover .galeria-track{
+  animation-play-state: paused;
+}
+/* Cursor para drag */
+.galeria-viewport { cursor: grab; }
+.galeria-viewport.is-dragging { cursor: grabbing; }
+
+
+/* botón volver */
+.btn-volver{
+  background-color:#000 !important;
+  color:#fff !important;
+  border-color:#000 !important;
+}
+.btn-volver:hover{
+  background-color:#b30000 !important;
+  border-color:#b30000 !important;
+  color:#fff !important;
+}
+/* =========================
+   GALERÍAS SERVICIOS (FULL ANCHO + CENTRADO VISUAL)
+========================= */
+
+#servicios .galeria-viewport{
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-inline: clamp(16px, 4vw, 64px);
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+
+  /* fade bordes */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
+#servicios .galeria-viewport::-webkit-scrollbar{ display:none; }
+#servicios .galeria-viewport.is-dragging{ cursor: grabbing; }
+
+#servicios .galeria-track{
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  align-items: center;
+}
+
+#servicios .galeria-track img{
+  height: 230px;
+  width: clamp(220px, 28vw, 360px); /* para que se vea “lleno” */
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+/* --- CENTRADO REAL del carrusel en servicios --- */
+#servicios .galeria-viewport{
+  display: flex;              /* <-- clave */
+  justify-content: center;    /* <-- clave */
+}
+
+#servicios .galeria-track{
+  min-width: 100%;            /* ocupa el ancho para poder centrar */
+  justify-content: center;    /* centra imágenes cuando no llenan */
+}
